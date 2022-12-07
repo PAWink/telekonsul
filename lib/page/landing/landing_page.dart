@@ -64,7 +64,7 @@ class _LandingPageState extends State<LandingPage> {
                           height: 12,
                         ),
                         const Text(
-                          "Now it is easier for patients who want to consult with a doctor without having to leave home.",
+                          "This is an application for car sharing. Please select if you have a car or don't have a car.",
                           style: TextStyle(color: Colors.white),
                         ),
                         const SizedBox(
@@ -93,7 +93,7 @@ class _LandingPageState extends State<LandingPage> {
                                   (states) => Colors.white),
                             ),
                             const Text(
-                              'Patient',
+                              'have a car',
                               style:
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
@@ -108,7 +108,7 @@ class _LandingPageState extends State<LandingPage> {
                                   (states) => Colors.white),
                             ),
                             const Text(
-                              'Doctor',
+                              'don\'t have a car',
                               style:
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
