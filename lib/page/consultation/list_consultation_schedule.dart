@@ -32,8 +32,7 @@ class _ListConsultationScheduleState extends State<ListConsultationSchedule> {
 
           if (value.listConsultationSchedule.isEmpty) {
             return const Center(
-              child: Text(
-                  "Your consultation schedule is empty, start to create one"),
+              child: Text("You don\'t have post"),
             );
           }
 
@@ -46,7 +45,7 @@ class _ListConsultationScheduleState extends State<ListConsultationSchedule> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    "List Consultation Schedule",
+                    "Car",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -107,7 +106,7 @@ class _ListConsultationScheduleState extends State<ListConsultationSchedule> {
                                 "Time : ${item.startAt!.format(context)} - ${item.endAt!.format(context)}",
                               ),
                               Text(
-                                "Price: \$${NumberFormat("#,###").format(item.price)}",
+                                "Price: \B${NumberFormat("#,###").format(item.price)}",
                               ),
                             ],
                           ),
@@ -144,8 +143,7 @@ class _ListConsultationScheduleState extends State<ListConsultationSchedule> {
             alignment: pw.Alignment.center,
             margin: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
             padding: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
-            child: pw.Text('Consultation Schedule Report',
-                style: pw.Theme.of(context).header3),
+            child: pw.Text('Report', style: pw.Theme.of(context).header3),
           );
         },
         build: (pw.Context context) => <pw.Widget>[
@@ -172,13 +170,12 @@ class _ListConsultationScheduleState extends State<ListConsultationSchedule> {
                     '${i + 1}',
                     '${data[i].daySchedule!.day}',
                     '${data[i].startAt!.format(ctx)} - ${data[i].endAt!.format(ctx)}',
-                    '\$${NumberFormat("#,###").format(data[i].price)}',
+                    '\B${NumberFormat("#,###").format(data[i].price)}',
                   ],
               ]),
           pw.Paragraph(text: ""),
           pw.Paragraph(
-              text: "Total Consultation Schedule : ${data.length}",
-              textAlign: pw.TextAlign.right),
+              text: "Total : ${data.length}", textAlign: pw.TextAlign.right),
           pw.Padding(padding: const pw.EdgeInsets.all(10)),
         ],
       ),

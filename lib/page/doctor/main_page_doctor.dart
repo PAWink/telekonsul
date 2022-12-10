@@ -67,6 +67,12 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                     ),
                   ],
                 ),
+                Center(
+                  child: Image.asset(
+                    'assets/login.png',
+                    width: 200,
+                  ),
+                ),
                 const SizedBox(
                   height: 32,
                 ),

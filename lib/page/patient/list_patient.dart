@@ -30,7 +30,7 @@ class _ListPasienState extends State<ListPasien> {
 
           if (value.listAllPatient.isEmpty) {
             return const Center(
-              child: Text("You don't have any patient yet"),
+              child: Text("Nobody go with you"),
             );
           }
 
@@ -44,7 +44,7 @@ class _ListPasienState extends State<ListPasien> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      "List Patient",
+                      "Who go with you",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -65,7 +65,7 @@ class _ListPasienState extends State<ListPasien> {
                             },
                             color: AppTheme.primaryColor,
                             textColor: Colors.white,
-                            child: const Text("Download List"),
+                            child: const Text("Download"),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
                             ),
@@ -110,8 +110,7 @@ class _ListPasienState extends State<ListPasien> {
             alignment: pw.Alignment.center,
             margin: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
             padding: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
-            child:
-                pw.Text('Patient Report', style: pw.Theme.of(context).header3),
+            child: pw.Text('Report', style: pw.Theme.of(context).header3),
           );
         },
         build: (pw.Context context) => <pw.Widget>[
@@ -145,8 +144,7 @@ class _ListPasienState extends State<ListPasien> {
               ]),
           pw.Paragraph(text: ""),
           pw.Paragraph(
-              text: "Total Patient : ${data.length}",
-              textAlign: pw.TextAlign.right),
+              text: "Total : ${data.length}", textAlign: pw.TextAlign.right),
           pw.Padding(padding: const pw.EdgeInsets.all(10)),
         ],
       ),
