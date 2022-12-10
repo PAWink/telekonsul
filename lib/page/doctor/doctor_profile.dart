@@ -30,10 +30,12 @@ class _DoctorProfileState extends State<DoctorProfile> {
                           radius: 64,
                           backgroundImage: (imageFile != null
                               ? FileImage(imageFile!)
-                              : value.doctor!.profileUrl != "" && imageFile == null
+                              : value.doctor!.profileUrl != "" &&
+                                      imageFile == null
                                   ? NetworkImage(value.doctor!.profileUrl!)
                                   : null) as ImageProvider<Object>?,
-                          child: imageFile != null || value.doctor!.profileUrl != ""
+                          child: imageFile != null ||
+                                  value.doctor!.profileUrl != ""
                               ? null
                               : const Center(
                                   child: Icon(
@@ -82,22 +84,26 @@ class _DoctorProfileState extends State<DoctorProfile> {
                             children: [
                               Text(
                                 "Name : ${value.doctor!.name}",
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 4),
                               Text(
                                 "Email : ${value.doctor!.email}",
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 4),
                               Text(
                                 "Phone Number : ${value.doctor!.phoneNumber}",
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                "Address : ${value.doctor!.address}",
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                "Faculty : ${value.doctor!.address}",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 4),
                             ],
@@ -111,7 +117,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
                     child: MaterialButton(
                       onPressed: () async {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => EditDoctorProfile(doctor: value.doctor),
+                          builder: (context) =>
+                              EditDoctorProfile(doctor: value.doctor),
                         ));
                       },
                       shape: RoundedRectangleBorder(
@@ -141,8 +148,10 @@ class _DoctorProfileState extends State<DoctorProfile> {
 
                           // Also call getUser again, for checking the FirebaseAuth with userChanges, which triggered when signOut()
                           // So it will be redirected to splash page again
-                          await Provider.of<UserProvider>(context, listen: false)
-                              .getUser(Provider.of<DoctorProvider>(context, listen: false));
+                          await Provider.of<UserProvider>(context,
+                                  listen: false)
+                              .getUser(Provider.of<DoctorProvider>(context,
+                                  listen: false));
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -190,7 +199,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 ),
                 child: IconButton(
                   icon: const Icon(Icons.photo_camera, color: Colors.white),
-                  onPressed: () => Navigator.of(context).pop(ImageSource.camera),
+                  onPressed: () =>
+                      Navigator.of(context).pop(ImageSource.camera),
                 ),
               ),
               Ink(
@@ -200,7 +210,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 ),
                 child: IconButton(
                   icon: const Icon(Icons.photo, color: Colors.white),
-                  onPressed: () => Navigator.of(context).pop(ImageSource.gallery),
+                  onPressed: () =>
+                      Navigator.of(context).pop(ImageSource.gallery),
                 ),
               ),
             ],
@@ -274,8 +285,9 @@ class _DoctorProfileState extends State<DoctorProfile> {
       String fileName = imageFile!.path.split("/").last;
 
       // Get firebase storage reference (Firebase Storage path)
-      firebase_storage.Reference ref =
-          firebase_storage.FirebaseStorage.instance.ref().child('Photo Profile/${doctor.uid}/$fileName');
+      firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+          .ref()
+          .child('Photo Profile/${doctor.uid}/$fileName');
 
       // Save the image to firebase storage
       final dataImage = await ref.putFile(imageFile!);

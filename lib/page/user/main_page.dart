@@ -43,16 +43,20 @@ class _MainPageState extends State<MainPage> {
                   children: [
                     Text(
                       "Hello, ${currentUser?.name ?? 'Loading...'}",
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.w800),
                     ),
                     const SizedBox(width: 24),
                     CircleAvatar(
                       radius: 16,
                       backgroundColor: Colors.grey,
-                      backgroundImage: currentUser?.profileUrl != "" && currentUser?.profileUrl != null
-                          ? NetworkImage(currentUser?.profileUrl ?? 'https://i.pravatar.cc/50')
+                      backgroundImage: currentUser?.profileUrl != "" &&
+                              currentUser?.profileUrl != null
+                          ? NetworkImage(currentUser?.profileUrl ??
+                              'https://t3.ftcdn.net/jpg/03/01/90/80/360_F_301908021_RjCnnJ6IBq1iuJ1rATp0vhqH4Q4l0LcH.jpg')
                           : null,
-                      child: currentUser?.profileUrl != "" && currentUser?.profileUrl != null
+                      child: currentUser?.profileUrl != "" &&
+                              currentUser?.profileUrl != null
                           ? null
                           : const Center(
                               child: Icon(
@@ -72,8 +76,9 @@ class _MainPageState extends State<MainPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
                     Text(
-                      "Doctor's Schedule Today",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+                      "Who go with you Today",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
                       textAlign: TextAlign.start,
                     ),
                   ],
@@ -93,7 +98,7 @@ class _MainPageState extends State<MainPage> {
                     if (value.listDoctor.isEmpty) {
                       return const Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: Text("There's no doctor available today"),
+                        child: Text("There's no go with you today"),
                       );
                     }
 
@@ -106,7 +111,9 @@ class _MainPageState extends State<MainPage> {
                         itemBuilder: (context, index) {
                           final item = value.listDoctor[index];
                           final itemKonsultasi = item.consultationSchedule
-                              .where((element) => element.daySchedule!.intValue == DateTime.now().weekday)
+                              .where((element) =>
+                                  element.daySchedule!.intValue ==
+                                  DateTime.now().weekday)
                               .first;
 
                           return _doctorCard(item, itemKonsultasi, context);
@@ -122,8 +129,9 @@ class _MainPageState extends State<MainPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
                     Text(
-                      "Doctor Specialist",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+                      "Choose who you want to go",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
                       textAlign: TextAlign.start,
                     )
                   ],
@@ -138,37 +146,19 @@ class _MainPageState extends State<MainPage> {
                     child: Row(
                       children: [
                         _buildDoctorSpecialist(
-                          specialist: "General practitioners",
+                          specialist: "Student",
                           imgAsset: 'assets/general_practitioners.png',
                         ),
                         _buildDoctorSpecialist(
-                          specialist: "Surgeon",
+                          specialist: "Professor",
                           imgAsset: 'assets/surgeon.png',
                         ),
                         _buildDoctorSpecialist(
-                          specialist: "Dentist",
+                          specialist: "Personnel",
                           imgAsset: 'assets/dentist.png',
                         ),
                       ],
                     ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Card(
-                  elevation: 4.0,
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const ListDiagnosisUser(),
-                        ),
-                      );
-                    },
-                    leading: const CircleAvatar(
-                      backgroundColor: AppTheme.primaryColor,
-                      child: Icon(Icons.receipt, color: Colors.white),
-                    ),
-                    title: const Text("Your Diagnosis"),
                   ),
                 ),
               ],
@@ -179,7 +169,8 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Container _doctorCard(DataDoctor item, ConsultationSchedule itemKonsultasi, BuildContext context) {
+  Container _doctorCard(DataDoctor item, ConsultationSchedule itemKonsultasi,
+      BuildContext context) {
     return Container(
       height: 146,
       margin: const EdgeInsets.only(bottom: 10, right: 8),
@@ -194,7 +185,9 @@ class _MainPageState extends State<MainPage> {
             CircleAvatar(
               radius: 32,
               backgroundColor: Colors.grey,
-              backgroundImage: item.doctor.profileUrl != "" ? NetworkImage(item.doctor.profileUrl!) : null,
+              backgroundImage: item.doctor.profileUrl != ""
+                  ? NetworkImage(item.doctor.profileUrl!)
+                  : null,
               child: item.doctor.profileUrl != ""
                   ? null
                   : const Center(
@@ -215,14 +208,16 @@ class _MainPageState extends State<MainPage> {
                   ),
                   Text(
                     "${item.doctor.specialist}",
-                    style:
-                        const TextStyle(color: AppTheme.darkerPrimaryColor, fontSize: 12, fontWeight: FontWeight.w700),
+                    style: const TextStyle(
+                        color: AppTheme.darkerPrimaryColor,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
                   Text(
-                    "\$${NumberFormat("#,###").format(itemKonsultasi.price)}",
+                    "\B${NumberFormat("#,###").format(itemKonsultasi.price)}",
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
@@ -238,8 +233,10 @@ class _MainPageState extends State<MainPage> {
                           ),
                           child: const Center(
                             child: Text(
-                              "Consulting",
-                              style: TextStyle(fontWeight: FontWeight.w900, color: Colors.black),
+                              "Review",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.black),
                             ),
                           ),
                         )
@@ -254,7 +251,9 @@ class _MainPageState extends State<MainPage> {
                               child: const Center(
                                 child: Text(
                                   "BOOKED",
-                                  style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.white),
                                 ),
                               ),
                             )
@@ -278,7 +277,9 @@ class _MainPageState extends State<MainPage> {
                                 child: const Center(
                                   child: Text(
                                     "BOOK",
-                                    style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w900,
+                                        color: Colors.white),
                                   ),
                                 ),
                               ),
@@ -292,7 +293,8 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  _buildDoctorSpecialist({required String specialist, required String imgAsset}) {
+  _buildDoctorSpecialist(
+      {required String specialist, required String imgAsset}) {
     return Container(
       margin: const EdgeInsets.all(10),
       width: 115,
@@ -301,7 +303,8 @@ class _MainPageState extends State<MainPage> {
         child: InkWell(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => ListDoctorSpecialist(specialist: specialist),
+              builder: (context) =>
+                  ListDoctorSpecialist(specialist: specialist),
             ));
           },
           child: Column(
@@ -313,7 +316,8 @@ class _MainPageState extends State<MainPage> {
               ),
               Text(
                 specialist,
-                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ],

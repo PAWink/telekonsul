@@ -35,7 +35,7 @@ class _ListTransactionUserState extends State<ListTransactionUser> {
 
             if (value.listTransaction.isEmpty) {
               return const Center(
-                child: Text("You never done any transaction yet"),
+                child: Text("You don\'t have any transaction"),
               );
             }
 
@@ -108,10 +108,12 @@ class _ListTransactionUserState extends State<ListTransactionUser> {
                           child: Text("Search result empty"),
                         )
                       : Expanded(
-                          child: _searchResult.isNotEmpty && _controller.text.isNotEmpty
+                          child: _searchResult.isNotEmpty &&
+                                  _controller.text.isNotEmpty
                               ? ListView.builder(
                                   itemBuilder: (context, index) {
-                                    final item = _searchResult.toSet().toList()[index];
+                                    final item =
+                                        _searchResult.toSet().toList()[index];
 
                                     return _transactionCard(item);
                                   },
@@ -160,7 +162,8 @@ class _ListTransactionUserState extends State<ListTransactionUser> {
                     flex: 2,
                     child: Text(
                       "Transaction ID #${item.docId}",
-                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.w800),
                     ),
                   ),
                   Expanded(
@@ -181,7 +184,7 @@ class _ListTransactionUserState extends State<ListTransactionUser> {
                     "Total : ",
                   ),
                   Text(
-                    "\$${NumberFormat("#,###").format(item.consultationSchedule!.price)}",
+                    "\B${NumberFormat("#,###").format(item.consultationSchedule!.price)}",
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),

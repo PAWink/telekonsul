@@ -36,18 +36,20 @@ class _ProfileUserState extends State<ProfileUser> {
                           radius: 64,
                           backgroundImage: (imageFile != null
                               ? FileImage(imageFile!)
-                              : value.user!.profileUrl != "" && imageFile == null
+                              : value.user!.profileUrl != "" &&
+                                      imageFile == null
                                   ? NetworkImage(value.user!.profileUrl!)
                                   : null) as ImageProvider<Object>?,
-                          child: imageFile != null || value.user!.profileUrl != ""
-                              ? null
-                              : const Center(
-                                  child: Icon(
-                                    Icons.person,
-                                    color: Colors.white,
-                                    size: 86,
-                                  ),
-                                ),
+                          child:
+                              imageFile != null || value.user!.profileUrl != ""
+                                  ? null
+                                  : const Center(
+                                      child: Icon(
+                                        Icons.person,
+                                        color: Colors.white,
+                                        size: 86,
+                                      ),
+                                    ),
                         ),
                       ),
                       Positioned(
@@ -88,22 +90,26 @@ class _ProfileUserState extends State<ProfileUser> {
                             children: [
                               Text(
                                 "Name : ${value.user!.name}",
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 4),
                               Text(
                                 "Email : ${value.user!.email}",
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 4),
                               Text(
                                 "Phone Number : ${value.user!.phoneNumber}",
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                "Address : ${value.user!.address}",
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                "Faculty : ${value.user!.address}",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 4),
                             ],
@@ -125,7 +131,9 @@ class _ProfileUserState extends State<ProfileUser> {
 
                           // Also call getUser again, for checking the FirebaseAuth with userChanges, which triggered when signOut()
                           // So it will be redirected to splash page again
-                          await Provider.of<UserProvider>(context, listen: false).getUser(null);
+                          await Provider.of<UserProvider>(context,
+                                  listen: false)
+                              .getUser(null);
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -173,7 +181,8 @@ class _ProfileUserState extends State<ProfileUser> {
                 ),
                 child: IconButton(
                   icon: const Icon(Icons.photo_camera, color: Colors.white),
-                  onPressed: () => Navigator.of(context).pop(ImageSource.camera),
+                  onPressed: () =>
+                      Navigator.of(context).pop(ImageSource.camera),
                 ),
               ),
               Ink(
@@ -183,7 +192,8 @@ class _ProfileUserState extends State<ProfileUser> {
                 ),
                 child: IconButton(
                   icon: const Icon(Icons.photo, color: Colors.white),
-                  onPressed: () => Navigator.of(context).pop(ImageSource.gallery),
+                  onPressed: () =>
+                      Navigator.of(context).pop(ImageSource.gallery),
                 ),
               ),
             ],
@@ -260,8 +270,9 @@ class _ProfileUserState extends State<ProfileUser> {
       String fileName = imageFile!.path.split("/").last;
 
       // Get firebase storage reference (Firebase Storage path)
-      firebase_storage.Reference ref =
-          firebase_storage.FirebaseStorage.instance.ref().child('Photo Profile/${user.uid}/$fileName');
+      firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+          .ref()
+          .child('Photo Profile/${user.uid}/$fileName');
 
       // Save the image to firebase storage
       final dataImage = await ref.putFile(imageFile!);

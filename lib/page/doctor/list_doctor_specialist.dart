@@ -2,7 +2,8 @@ part of '../pages.dart';
 
 class ListDoctorSpecialist extends StatefulWidget {
   final String specialist;
-  const ListDoctorSpecialist({Key? key, required this.specialist}) : super(key: key);
+  const ListDoctorSpecialist({Key? key, required this.specialist})
+      : super(key: key);
 
   @override
   _ListDoctorSpecialistState createState() => _ListDoctorSpecialistState();
@@ -52,7 +53,7 @@ class _ListDoctorSpecialistState extends State<ListDoctorSpecialist> {
 
             if (value.listSpecialistDoctor.isEmpty) {
               return const Center(
-                child: Text("There's no doctor available today"),
+                child: Text("No sharing car today"),
               );
             }
 
@@ -90,7 +91,7 @@ class _ListDoctorSpecialistState extends State<ListDoctorSpecialist> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      hintText: "Search Doctor",
+                      hintText: "Search sharing car",
                     ),
                     onChanged: (query) {
                       if (query.isEmpty || query == "") {
@@ -125,13 +126,18 @@ class _ListDoctorSpecialistState extends State<ListDoctorSpecialist> {
                           child: Text("Search result is empty"),
                         )
                       : Expanded(
-                          child: _searchResult.isNotEmpty && _controller.text.isNotEmpty
+                          child: _searchResult.isNotEmpty &&
+                                  _controller.text.isNotEmpty
                               ? ListView.builder(
                                   itemBuilder: (context, index) {
-                                    final item = _searchResult.toSet().toList()[index];
+                                    final item =
+                                        _searchResult.toSet().toList()[index];
 
-                                    final itemKonsultasi = item.consultationSchedule
-                                        .where((element) => element.daySchedule!.intValue == DateTime.now().weekday)
+                                    final itemKonsultasi = item
+                                        .consultationSchedule
+                                        .where((element) =>
+                                            element.daySchedule!.intValue ==
+                                            DateTime.now().weekday)
                                         .first;
 
                                     return doctorCard(item, itemKonsultasi);
@@ -143,10 +149,14 @@ class _ListDoctorSpecialistState extends State<ListDoctorSpecialist> {
                                   itemCount: value.listSpecialistDoctor.length,
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) {
-                                    final item = value.listSpecialistDoctor[index];
+                                    final item =
+                                        value.listSpecialistDoctor[index];
 
-                                    final itemKonsultasi = item.consultationSchedule
-                                        .where((element) => element.daySchedule!.intValue == DateTime.now().weekday)
+                                    final itemKonsultasi = item
+                                        .consultationSchedule
+                                        .where((element) =>
+                                            element.daySchedule!.intValue ==
+                                            DateTime.now().weekday)
                                         .first;
 
                                     return doctorCard(item, itemKonsultasi);
@@ -176,7 +186,9 @@ class _ListDoctorSpecialistState extends State<ListDoctorSpecialist> {
             CircleAvatar(
               radius: 32,
               backgroundColor: Colors.grey,
-              backgroundImage: item.doctor.profileUrl != "" ? NetworkImage(item.doctor.profileUrl!) : null,
+              backgroundImage: item.doctor.profileUrl != ""
+                  ? NetworkImage(item.doctor.profileUrl!)
+                  : null,
               child: item.doctor.profileUrl != ""
                   ? null
                   : const Center(
@@ -209,7 +221,7 @@ class _ListDoctorSpecialistState extends State<ListDoctorSpecialist> {
                     height: 5,
                   ),
                   Text(
-                    "\$${NumberFormat("#,###").format(itemKonsultasi.price)}",
+                    "\B${NumberFormat("#,###").format(itemKonsultasi.price)}",
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
@@ -226,7 +238,9 @@ class _ListDoctorSpecialistState extends State<ListDoctorSpecialist> {
                           child: const Center(
                             child: Text(
                               "Consulting",
-                              style: TextStyle(fontWeight: FontWeight.w900, color: Colors.black),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.black),
                             ),
                           ),
                         )
@@ -241,7 +255,9 @@ class _ListDoctorSpecialistState extends State<ListDoctorSpecialist> {
                               child: const Center(
                                 child: Text(
                                   "BOOKED",
-                                  style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.white),
                                 ),
                               ),
                             )
@@ -265,7 +281,9 @@ class _ListDoctorSpecialistState extends State<ListDoctorSpecialist> {
                                 child: const Center(
                                   child: Text(
                                     "BOOK",
-                                    style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w900,
+                                        color: Colors.white),
                                   ),
                                 ),
                               ),

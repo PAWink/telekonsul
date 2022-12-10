@@ -42,16 +42,20 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                   children: [
                     Text(
                       "Hello, ${currentUser?.name ?? 'Loading...'}",
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.w800),
                     ),
                     const SizedBox(width: 24),
                     CircleAvatar(
                       radius: 16,
                       backgroundColor: Colors.grey,
-                      backgroundImage: currentUser?.profileUrl != "" && currentUser?.profileUrl != null
-                          ? NetworkImage(currentUser?.profileUrl ?? 'https://i.pravatar.cc/50')
+                      backgroundImage: currentUser?.profileUrl != "" &&
+                              currentUser?.profileUrl != null
+                          ? NetworkImage(currentUser?.profileUrl ??
+                              'https://t3.ftcdn.net/jpg/03/01/90/80/360_F_301908021_RjCnnJ6IBq1iuJ1rATp0vhqH4Q4l0LcH.jpg')
                           : null,
-                      child: currentUser?.profileUrl != "" && currentUser?.profileUrl != null
+                      child: currentUser?.profileUrl != "" &&
+                              currentUser?.profileUrl != null
                           ? null
                           : const Center(
                               child: Icon(
@@ -67,7 +71,7 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                   height: 32,
                 ),
                 const Text(
-                  "Queue today",
+                  "Who go with you today",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                   textAlign: TextAlign.start,
                 ),
@@ -88,7 +92,7 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                     if (value.listQueue.isEmpty) {
                       return const Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: Text("There's no queue today"),
+                        child: Text("Don\'t sharing car today"),
                       );
                     }
 
@@ -110,7 +114,7 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                   height: 8,
                 ),
                 const Text(
-                  "List Patient",
+                  "Who want to go with you",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                   textAlign: TextAlign.start,
                 ),
@@ -131,7 +135,7 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                     if (value.patient.isEmpty) {
                       return const Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: Text("You have no patient yet"),
+                        child: Text("Nobody go with you"),
                       );
                     }
 
@@ -174,7 +178,7 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                       backgroundColor: AppTheme.primaryColor,
                       child: Icon(Icons.add, color: Colors.white),
                     ),
-                    title: const Text("Add consultation schedule"),
+                    title: const Text("Add Sharing car"),
                   ),
                 ),
                 Card(
@@ -183,7 +187,8 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const ListConsultationSchedule(),
+                          builder: (context) =>
+                              const ListConsultationSchedule(),
                         ),
                       );
                     },
@@ -191,7 +196,7 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                       backgroundColor: AppTheme.darkerPrimaryColor,
                       child: Icon(Icons.date_range, color: Colors.white),
                     ),
-                    title: const Text("Consultation schedule list"),
+                    title: const Text("Your post"),
                   ),
                 ),
                 Card(
@@ -208,22 +213,7 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                       backgroundColor: AppTheme.primaryColor,
                       child: Icon(Icons.assignment_ind, color: Colors.white),
                     ),
-                    title: const Text("Patient list"),
-                  ),
-                ),
-                Card(
-                  elevation: 4.0,
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => const ListDoctorQueue()),
-                      );
-                    },
-                    leading: const CircleAvatar(
-                      backgroundColor: AppTheme.darkerPrimaryColor,
-                      child: Icon(Icons.assignment, color: Colors.white),
-                    ),
-                    title: const Text("Queue list"),
+                    title: const Text("Who want to go with you"),
                   ),
                 ),
               ],
@@ -248,7 +238,9 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                 CircleAvatar(
                   radius: 28,
                   backgroundColor: Colors.grey,
-                  backgroundImage: item.profileUrl != "" ? NetworkImage(item.profileUrl!) : null,
+                  backgroundImage: item.profileUrl != ""
+                      ? NetworkImage(item.profileUrl!)
+                      : null,
                   child: item.profileUrl != ""
                       ? null
                       : const Center(
@@ -264,7 +256,8 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                 ),
                 Text(
                   "${item.name}",
-                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w700, fontSize: 12),
                 )
               ],
             ),
@@ -288,7 +281,8 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
               child: CircleAvatar(
                 radius: 32,
                 backgroundColor: Colors.grey,
-                backgroundImage: item.transactionData!.createdBy!.profileUrl != ""
+                backgroundImage: item.transactionData!.createdBy!.profileUrl !=
+                        ""
                     ? NetworkImage(item.transactionData!.createdBy!.profileUrl!)
                     : null,
                 child: item.transactionData!.createdBy!.profileUrl != ""
@@ -313,7 +307,7 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                   height: 5,
                 ),
                 Text(
-                  "\$${NumberFormat("#,###").format(item.transactionData!.consultationSchedule!.price)}",
+                  "\B${NumberFormat("#,###").format(item.transactionData!.consultationSchedule!.price)}",
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -335,7 +329,8 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                     child: Center(
                       child: Text(
                         "${item.transactionData!.consultationSchedule!.startAt!.format(context)} - ${item.transactionData!.consultationSchedule!.endAt!.format(context)}",
-                        style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -358,7 +353,7 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: const Text("Start consultation"),
+                  child: const Text("Call"),
                 ),
               ],
             ),
