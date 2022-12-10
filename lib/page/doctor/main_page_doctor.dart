@@ -231,98 +231,92 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
   }
 
   _queueCard(Queue item) {
-    return Card(
-      elevation: 4,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 18.0, right: 5),
+          child: CircleAvatar(
+            radius: 32,
+            backgroundColor: Colors.grey,
+            backgroundImage: item.transactionData!.createdBy!.profileUrl != ""
+                ? NetworkImage(item.transactionData!.createdBy!.profileUrl!)
+                : null,
+            child: item.transactionData!.createdBy!.profileUrl != ""
+                ? null
+                : const Center(
+                    child: Icon(
+                      Icons.person,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                  ),
+          ),
+        ),
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 18.0, right: 5),
-              child: CircleAvatar(
-                radius: 32,
-                backgroundColor: Colors.grey,
-                backgroundImage: item.transactionData!.createdBy!.profileUrl !=
-                        ""
-                    ? NetworkImage(item.transactionData!.createdBy!.profileUrl!)
-                    : null,
-                child: item.transactionData!.createdBy!.profileUrl != ""
-                    ? null
-                    : const Center(
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.white,
-                          size: 24,
-                        ),
-                      ),
+            Text(
+              "Name ${item.transactionData!.createdBy!.name}",
+              style: TextStyle(fontWeight: FontWeight.bold),
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Text(
+              "Price \B${NumberFormat("#,###").format(item.transactionData!.consultationSchedule!.price)}",
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Container(
+              decoration: const BoxDecoration(
+                color: AppTheme.secondaryColor,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    "${item.transactionData!.consultationSchedule!.startAt!.format(context)} - ${item.transactionData!.consultationSchedule!.endAt!.format(context)}",
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${item.transactionData!.createdBy!.name}",
-                  textAlign: TextAlign.left,
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  "\B${NumberFormat("#,###").format(item.transactionData!.consultationSchedule!.price)}",
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    color: AppTheme.secondaryColor,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8),
+            const SizedBox(
+              height: 5,
+            ),
+            MaterialButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ConsultationPage(
+                      queue: item,
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                      child: Text(
-                        "${item.transactionData!.consultationSchedule!.startAt!.format(context)} - ${item.transactionData!.consultationSchedule!.endAt!.format(context)}",
-                        style: const TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                MaterialButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ConsultationPage(
-                          queue: item,
-                        ),
-                      ),
-                    );
-                  },
-                  color: AppTheme.primaryColor,
-                  textColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: const Text("Call"),
-                ),
-              ],
+                );
+              },
+              color: AppTheme.primaryColor,
+              textColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: const Text("Call"),
             ),
           ],
         ),
-      ),
+      ],
     );
   }
 }
