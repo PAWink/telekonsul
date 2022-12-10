@@ -2,7 +2,8 @@ part of '../pages.dart';
 
 class ConsultationDetail extends StatefulWidget {
   final DataDoctor dataDoctor;
-  const ConsultationDetail({Key? key, required this.dataDoctor}) : super(key: key);
+  const ConsultationDetail({Key? key, required this.dataDoctor})
+      : super(key: key);
 
   @override
   _ConsultationDetailState createState() => _ConsultationDetailState();
@@ -33,8 +34,9 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
                       child: CircleAvatar(
                         radius: 56,
                         backgroundColor: Colors.grey,
-                        backgroundImage:
-                            dataDoctor.doctor.profileUrl != "" ? NetworkImage(dataDoctor.doctor.profileUrl!) : null,
+                        backgroundImage: dataDoctor.doctor.profileUrl != ""
+                            ? NetworkImage(dataDoctor.doctor.profileUrl!)
+                            : null,
                         child: dataDoctor.doctor.profileUrl != ""
                             ? null
                             : const Center(
@@ -73,7 +75,7 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
                     Row(
                       children: [
                         const Text(
-                          "Available at:",
+                          "Time:",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
@@ -81,7 +83,9 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
                         const SizedBox(width: 16.0),
                         Container(
                           child: dataDoctor.consultationSchedule
-                              .where((element) => element.daySchedule!.intValue == DateTime.now().weekday)
+                              .where((element) =>
+                                  element.daySchedule!.intValue ==
+                                  DateTime.now().weekday)
                               .map(
                                 (e) => Container(
                                   decoration: BoxDecoration(
@@ -92,7 +96,8 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
                                       "${e.startAt!.format(context)} - ${e.endAt!.format(context)}",
-                                      style: const TextStyle(color: Colors.black),
+                                      style:
+                                          const TextStyle(color: Colors.black),
                                     ),
                                   ),
                                 ),
@@ -103,7 +108,7 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
                     ),
                     const SizedBox(height: 16.0),
                     const Text(
-                      "Pratic Address:",
+                      "Faculty:",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -125,10 +130,12 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
                         ),
                         const SizedBox(width: 16),
                         dataDoctor.consultationSchedule
-                            .where((element) => element.daySchedule!.intValue == DateTime.now().weekday)
+                            .where((element) =>
+                                element.daySchedule!.intValue ==
+                                DateTime.now().weekday)
                             .map(
                               (e) => Text(
-                                "\$${NumberFormat("#,###").format(e.price)}",
+                                "\B${NumberFormat("#,###").format(e.price)}",
                               ),
                             )
                             .first,
@@ -150,7 +157,8 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
                                 if (transactionData != null) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                      content: Text("Transaction Sucessfully Created!"),
+                                      content: Text(
+                                          "Transaction Sucessfully Created!"),
                                     ),
                                   );
                                   Navigator.of(context).pushReplacement(
@@ -184,18 +192,22 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
 
   Future<TransactionModel?> _bookNow() async {
     // Get patient data, which is the user itself
-    UserModel dataPatient = Provider.of<UserProvider>(context, listen: false).user!;
+    UserModel dataPatient =
+        Provider.of<UserProvider>(context, listen: false).user!;
 
     // Get schedule data
     ConsultationSchedule schedule = dataDoctor.consultationSchedule
-        .where((element) => element.daySchedule!.intValue == DateTime.now().weekday)
+        .where((element) =>
+            element.daySchedule!.intValue == DateTime.now().weekday)
         .first;
 
     DateTime now = DateTime.now();
 
     // Assign TimeOfDay to DateTime
-    DateTime startAt = DateTime(now.year, now.month, now.day, schedule.startAt!.hour, schedule.startAt!.minute);
-    DateTime endAt = DateTime(now.year, now.month, now.day, schedule.endAt!.hour, schedule.endAt!.minute);
+    DateTime startAt = DateTime(now.year, now.month, now.day,
+        schedule.startAt!.hour, schedule.startAt!.minute);
+    DateTime endAt = DateTime(now.year, now.month, now.day,
+        schedule.endAt!.hour, schedule.endAt!.minute);
 
     Map<String, dynamic> dataSchedule = {
       'day_schedule': schedule.daySchedule!.toJson(),
@@ -215,7 +227,9 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
     };
 
     // Add transaction data to Firestore
-    final newTransaction = await Provider.of<TransactionProvider>(context, listen: false).addTransaction(
+    final newTransaction =
+        await Provider.of<TransactionProvider>(context, listen: false)
+            .addTransaction(
       doctorId: dataDoctor.doctor.uid,
       dataTransaction: dataTransaction,
       dataPatient: dataPatient.toJson(),
@@ -232,21 +246,28 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
     }
 
     // Get doctor queue data
-    final docQueue = await FirebaseFirestore.instance.doc('doctor/${dataDoctor.doctor.uid}').collection('queue').get();
+    final docQueue = await FirebaseFirestore.instance
+        .doc('doctor/${dataDoctor.doctor.uid}')
+        .collection('queue')
+        .get();
 
     List<Queue> listQueue = [];
     listQueue.addAll(docQueue.docs.map((e) => Queue.fromJson(e.data())));
 
     // Tommorow
-    DateTime before = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1);
+    DateTime before = DateTime(
+        DateTime.now().year, DateTime.now().month, DateTime.now().day + 1);
 
     // Yesterday
-    DateTime after = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day - 1, 24, 0);
+    DateTime after = DateTime(DateTime.now().year, DateTime.now().month,
+        DateTime.now().day - 1, 24, 0);
 
     // Find today queue
     listQueue = listQueue
         .where(
-          (element) => element.createdAt.isBefore(before) && element.createdAt.isAfter(after),
+          (element) =>
+              element.createdAt.isBefore(before) &&
+              element.createdAt.isAfter(after),
         )
         .toList();
 
@@ -276,10 +297,12 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
     };
 
     // Adding the queue data to Firestore
-    await Provider.of<QueueProvider>(context, listen: false).addQueue(dataDoctor.doctor.uid, dataQueue);
+    await Provider.of<QueueProvider>(context, listen: false)
+        .addQueue(dataDoctor.doctor.uid, dataQueue);
 
     // Refresh doctor list
-    await Provider.of<DoctorProvider>(context, listen: false).getAllDoctor(newTransaction.createdBy!.uid);
+    await Provider.of<DoctorProvider>(context, listen: false)
+        .getAllDoctor(newTransaction.createdBy!.uid);
 
     // Refresh Transaction
     String userId = context.read<UserProvider>().user!.uid!;

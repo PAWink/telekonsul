@@ -56,22 +56,31 @@ class _ListDoctorTransactionState extends State<ListDoctorTransaction> {
             earning = 0;
 
             // Get total of success transaction
-            success = value.listTransaction.where((element) => element.status == 'Success').length;
+            success = value.listTransaction
+                .where((element) => element.status == 'Success')
+                .length;
 
             // Get total of failed transaction
-            failed = value.listTransaction.where((element) => element.status == 'Failed').length;
+            failed = value.listTransaction
+                .where((element) => element.status == 'Failed')
+                .length;
 
             // Get total of pending transaction
             pending = value.listTransaction
                 .where((element) =>
-                    element.status == 'Waiting for Payment' || element.status == 'Waiting for Confirmation')
+                    element.status == 'Waiting for Payment' ||
+                    element.status == 'Waiting for Confirmation')
                 .length;
 
             // Get all success transaction
-            successList = value.listTransaction.where((element) => element.status == 'Success').toList();
+            successList = value.listTransaction
+                .where((element) => element.status == 'Success')
+                .toList();
 
             // Calculating earning from success transaction
-            successList.map((e) => earning += e.consultationSchedule!.price!).toSet();
+            successList
+                .map((e) => earning += e.consultationSchedule!.price!)
+                .toSet();
 
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -87,33 +96,6 @@ class _ListDoctorTransactionState extends State<ListDoctorTransaction> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      _isLoading
-                          ? const CircularProgressIndicator()
-                          : MaterialButton(
-                              onPressed: () async {
-                                setState(() {
-                                  _isLoading = true;
-                                });
-
-                                await _downloadData(
-                                  value.listTransaction,
-                                  success,
-                                  failed,
-                                  pending,
-                                  earning,
-                                );
-
-                                setState(() {
-                                  _isLoading = false;
-                                });
-                              },
-                              color: AppTheme.primaryColor,
-                              textColor: Colors.white,
-                              child: const Text("Download List"),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
                     ],
                   ),
                   const SizedBox(height: 16.0),
@@ -156,8 +138,9 @@ class _ListDoctorTransactionState extends State<ListDoctorTransaction> {
                                 const Text("Earning"),
                                 const SizedBox(height: 8),
                                 Text(
-                                  "\$${NumberFormat("#,###").format(earning)}",
-                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                  "\B${NumberFormat("#,###").format(earning)}",
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
@@ -189,7 +172,7 @@ class _ListDoctorTransactionState extends State<ListDoctorTransaction> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      hintText: "Search transaction by status",
+                      hintText: "Search status",
                     ),
                     onChanged: (query) {
                       if (query.isEmpty || query == "") {
@@ -225,10 +208,12 @@ class _ListDoctorTransactionState extends State<ListDoctorTransaction> {
                           child: Text("Search result is empty"),
                         )
                       : Expanded(
-                          child: _searchResult.isNotEmpty && _controller.text.isNotEmpty
+                          child: _searchResult.isNotEmpty &&
+                                  _controller.text.isNotEmpty
                               ? ListView.builder(
                                   itemBuilder: (context, index) {
-                                    final item = _searchResult.toSet().toList()[index];
+                                    final item =
+                                        _searchResult.toSet().toList()[index];
 
                                     return _transactionCard(item);
                                   },
@@ -277,14 +262,16 @@ class _ListDoctorTransactionState extends State<ListDoctorTransaction> {
                     flex: 2,
                     child: Text(
                       "Transaction ID #${item.docId}",
-                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.w800),
                     ),
                   ),
                   Expanded(
                     flex: 1,
                     child: Text(
                       DateFormat("dd MMMM yyyy").format(item.createdAt),
-                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.w800),
                     ),
                   ),
                 ],
@@ -299,7 +286,7 @@ class _ListDoctorTransactionState extends State<ListDoctorTransaction> {
                     "Total : ",
                   ),
                   Text(
-                    "\$${NumberFormat("#,###").format(item.consultationSchedule!.price)}",
+                    "\B${NumberFormat("#,###").format(item.consultationSchedule!.price)}",
                   ),
                 ],
               ),
@@ -323,7 +310,7 @@ class _ListDoctorTransactionState extends State<ListDoctorTransaction> {
     return RichText(
       text: TextSpan(children: [
         const TextSpan(
-          text: "Transaction ",
+          text: " ",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -361,14 +348,16 @@ class _ListDoctorTransactionState extends State<ListDoctorTransaction> {
 
     pdf.addPage(
       pw.MultiPage(
-        pageFormat: PdfPageFormat.letter.copyWith(marginBottom: 1.5 * PdfPageFormat.cm),
+        pageFormat:
+            PdfPageFormat.letter.copyWith(marginBottom: 1.5 * PdfPageFormat.cm),
         crossAxisAlignment: pw.CrossAxisAlignment.start,
         header: (pw.Context context) {
           return pw.Container(
             alignment: pw.Alignment.center,
             margin: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
             padding: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
-            child: pw.Text('Transaction Report', style: pw.Theme.of(context).header3),
+            child: pw.Text('Transaction Report',
+                style: pw.Theme.of(context).header3),
           );
         },
         build: (pw.Context context) => <pw.Widget>[
@@ -401,20 +390,23 @@ class _ListDoctorTransactionState extends State<ListDoctorTransaction> {
                   ],
               ]),
           pw.Paragraph(text: ""),
-          pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
-            pw.Text("Total Transaction : ${data.length}"),
-            pw.Text("Earning : \$${NumberFormat("#,###").format(earning)},-"),
-          ]),
+          pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+              children: [
+                pw.Text("Total : ${data.length}"),
+                pw.Text(
+                    "Earning : \$${NumberFormat("#,###").format(earning)},-"),
+              ]),
           pw.Paragraph(
-            text: "Transaction Success : $success",
+            text: "Success : $success",
             textAlign: pw.TextAlign.right,
           ),
           pw.Paragraph(
-            text: "Transaction Failed : $failed",
+            text: "Failed : $failed",
             textAlign: pw.TextAlign.right,
           ),
           pw.Paragraph(
-            text: "Transaction Pending : $pending",
+            text: "Pending : $pending",
             textAlign: pw.TextAlign.right,
           ),
           pw.Padding(padding: const pw.EdgeInsets.all(10)),
@@ -427,7 +419,8 @@ class _ListDoctorTransactionState extends State<ListDoctorTransaction> {
     String path = appDocDir.path;
 
     // File name and path
-    final file = File("$path/doctor_transaction_report_${DateTime.now().toString()}.pdf");
+    final file = File(
+        "$path/doctor_transaction_report_${DateTime.now().toString()}.pdf");
 
     // Saving file as pdf
     await file.writeAsBytes(await pdf.save()).whenComplete(

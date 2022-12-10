@@ -82,11 +82,11 @@ class _DoctorTransactionDetailState extends State<DoctorTransactionDetail> {
                       const SizedBox(
                         height: 15,
                       ),
-                      buildText("Doctor Name", transaction.doctorProfile!.name),
+                      buildText("Name", transaction.doctorProfile!.name),
                       const SizedBox(
                         height: 5,
                       ),
-                      buildText("Consultation Time",
+                      buildText("Time",
                           "${transaction.consultationSchedule!.startAt!.format(context)} - ${transaction.consultationSchedule!.endAt!.format(context)}"),
                       const SizedBox(
                         height: 5,
@@ -109,7 +109,7 @@ class _DoctorTransactionDetailState extends State<DoctorTransactionDetail> {
                           ),
                           Expanded(
                             child: Text(
-                              "\$${NumberFormat("#,###").format(transaction.consultationSchedule!.price)},-",
+                              "\B${NumberFormat("#,###").format(transaction.consultationSchedule!.price)},-",
                               style:
                                   const TextStyle(fontWeight: FontWeight.w800),
                             ),
@@ -251,7 +251,7 @@ class _DoctorTransactionDetailState extends State<DoctorTransactionDetail> {
                                     ),
                                     color: AppTheme.darkerPrimaryColor,
                                     child: const Text(
-                                      "Download Invoice",
+                                      "Download",
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 12),
                                     ),
@@ -301,7 +301,7 @@ class _DoctorTransactionDetailState extends State<DoctorTransactionDetail> {
             alignment: pw.Alignment.center,
             margin: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
             padding: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
-            child: pw.Text('Invoice #${data.docId}',
+            child: pw.Text('Pay #${data.docId}',
                 style: pw.Theme.of(context).header3),
           );
         },
@@ -312,7 +312,7 @@ class _DoctorTransactionDetailState extends State<DoctorTransactionDetail> {
               headers: <String>[
                 'No',
                 'Name',
-                'Consultation Time',
+                'Time',
                 'Price',
               ],
               headerStyle: pw.TextStyle(
@@ -326,9 +326,9 @@ class _DoctorTransactionDetailState extends State<DoctorTransactionDetail> {
               data: <List<String>>[
                 <String>[
                   '1',
-                  'Consultation ${data.doctorProfile!.name} Specialist ${data.doctorProfile!.specialist}',
+                  '${data.doctorProfile!.name}  ${data.doctorProfile!.specialist}',
                   '${data.consultationSchedule!.startAt!.format(ctx)} - ${data.consultationSchedule!.endAt!.format(ctx)}',
-                  '\$${NumberFormat("#,###").format(data.consultationSchedule!.price)}'
+                  '\B${NumberFormat("#,###").format(data.consultationSchedule!.price)}'
                 ],
               ]),
           pw.Paragraph(text: ""),
@@ -336,7 +336,7 @@ class _DoctorTransactionDetailState extends State<DoctorTransactionDetail> {
             mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
             children: [
               pw.Expanded(
-                child: pw.Text("Status Transaction : ${data.status}"),
+                child: pw.Text("Status: ${data.status}"),
               ),
               pw.Expanded(
                 child: pw.Text(

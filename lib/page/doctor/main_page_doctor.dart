@@ -77,7 +77,7 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                   height: 32,
                 ),
                 const Text(
-                  "Who go with you today",
+                  "Call with friend",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                   textAlign: TextAlign.start,
                 ),
@@ -111,49 +111,6 @@ class _MainPageDoctorState extends State<MainPageDoctor> {
                           final item = value.listQueue[index];
 
                           return _queueCard(item);
-                        },
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                const Text(
-                  "Who want to go with you",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
-                  textAlign: TextAlign.start,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Consumer<PatientProvider>(
-                  builder: (context, value, child) {
-                    if (value.isLoading) {
-                      return const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    }
-
-                    if (value.patient.isEmpty) {
-                      return const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text("Nobody go with you"),
-                      );
-                    }
-
-                    return SizedBox(
-                      height: 120,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: value.patient.length,
-                        itemBuilder: (context, index) {
-                          final item = value.patient[index];
-
-                          return _patientCard(item);
                         },
                       ),
                     );

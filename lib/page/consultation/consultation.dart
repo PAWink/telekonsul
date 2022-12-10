@@ -50,7 +50,8 @@ class _ConsultationPageState extends State<ConsultationPage> {
                 Expanded(
                   flex: 1,
                   child: Text(
-                    DateFormat("dd MMMM yyyy").format(queue.transactionData!.createdAt),
+                    DateFormat("dd MMMM yyyy")
+                        .format(queue.transactionData!.createdAt),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -58,7 +59,8 @@ class _ConsultationPageState extends State<ConsultationPage> {
                 ),
               ]),
               const SizedBox(height: 8),
-              Text("\$${NumberFormat("#,###").format(queue.transactionData!.consultationSchedule!.price)}"),
+              Text(
+                  "\B${NumberFormat("#,###").format(queue.transactionData!.consultationSchedule!.price)}"),
               const SizedBox(height: 8),
               Container(
                 padding: const EdgeInsets.all(8.0),
@@ -77,9 +79,11 @@ class _ConsultationPageState extends State<ConsultationPage> {
                     CircleAvatar(
                       radius: 56,
                       backgroundColor: Colors.grey,
-                      backgroundImage: queue.transactionData!.createdBy!.profileUrl != ""
-                          ? NetworkImage(queue.transactionData!.createdBy!.profileUrl!)
-                          : null,
+                      backgroundImage:
+                          queue.transactionData!.createdBy!.profileUrl != ""
+                              ? NetworkImage(
+                                  queue.transactionData!.createdBy!.profileUrl!)
+                              : null,
                       child: queue.transactionData!.createdBy!.profileUrl != ""
                           ? null
                           : const Center(
@@ -101,22 +105,26 @@ class _ConsultationPageState extends State<ConsultationPage> {
                           children: [
                             Text(
                               "Name : ${queue.transactionData!.createdBy!.name}",
-                              style: const TextStyle(fontWeight: FontWeight.bold),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 4),
                             Text(
                               "Email : ${queue.transactionData!.createdBy!.email}",
-                              style: const TextStyle(fontWeight: FontWeight.bold),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 4),
                             Text(
                               "Phone Number : ${queue.transactionData!.createdBy!.phoneNumber}",
-                              style: const TextStyle(fontWeight: FontWeight.bold),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              "Address : ${queue.transactionData!.createdBy!.address}",
-                              style: const TextStyle(fontWeight: FontWeight.bold),
+                              "Faculty : ${queue.transactionData!.createdBy!.address}",
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 4),
                           ],
@@ -124,64 +132,6 @@ class _ConsultationPageState extends State<ConsultationPage> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    _isLoading
-                        ? const CircularProgressIndicator()
-                        : queue.isDone! || _isDone
-                            ? MaterialButton(
-                                minWidth: 148,
-                                height: 39,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                color: AppTheme.darkerPrimaryColor,
-                                child: const Text(
-                                  "Consultation has ended",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                onPressed: () async {
-                                  Navigator.of(context).pop();
-                                },
-                              )
-                            : currentDoctor!.isBusy!
-                                ? MaterialButton(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    color: AppTheme.dangerColor,
-                                    child: const Text(
-                                      "Finish Consultation",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    onPressed: () async {
-                                      setState(() {
-                                        _isLoading = true;
-                                      });
-                                      await _finish(context);
-                                      setState(() {
-                                        _isLoading = false;
-                                        _isDone = true;
-                                      });
-                                    },
-                                  )
-                                : MaterialButton(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    color: AppTheme.primaryColor,
-                                    child: const Text(
-                                      "Start Consultation",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    onPressed: () async {
-                                      setState(() {
-                                        _isLoading = true;
-                                      });
-                                      await _startConsulting();
-                                      setState(() {
-                                        _isLoading = false;
-                                      });
-                                    },
-                                  ),
                   ],
                 ),
               ),
@@ -197,7 +147,8 @@ class _ConsultationPageState extends State<ConsultationPage> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text("Are you sure want to start?"),
-        content: const Text("You will be directed to WhatsApp, to start consulting with patient"),
+        content: const Text(
+            "You will be directed to WhatsApp, to start consulting with patient"),
         actions: [
           ElevatedButton(
             onPressed: () => Navigator.of(context).pop(true),
@@ -213,7 +164,8 @@ class _ConsultationPageState extends State<ConsultationPage> {
 
     if (konfirmasi) {
       // WhatsApp deeplink, for redirecting to WhatsApp
-      String _url = "https://api.whatsapp.com/send?phone=${queue.transactionData!.createdBy!.phoneNumber}";
+      String _url =
+          "https://api.whatsapp.com/send?phone=${queue.transactionData!.createdBy!.phoneNumber}";
 
       await canLaunchUrlString(_url)
           ? await launchUrlString(
@@ -227,7 +179,9 @@ class _ConsultationPageState extends State<ConsultationPage> {
 
       // Change the doctor value to busy, so everyone can't book this doctor right now, until consultation is finish
       Provider.of<DoctorProvider>(context, listen: false).setDoctor = newData;
-      await FirebaseFirestore.instance.doc('doctor/${newData.uid}').update({'is_busy': true});
+      await FirebaseFirestore.instance
+          .doc('doctor/${newData.uid}')
+          .update({'is_busy': true});
     }
   }
 
@@ -236,7 +190,8 @@ class _ConsultationPageState extends State<ConsultationPage> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text("Are you sure want to finish this consultation?"),
-        content: const Text("When the consultation is done, you'll asked to report patient diagnosis"),
+        content: const Text(
+            "When the consultation is done, you'll asked to report patient diagnosis"),
         actions: [
           ElevatedButton(
             onPressed: () => Navigator.of(context).pop(true),
@@ -256,10 +211,14 @@ class _ConsultationPageState extends State<ConsultationPage> {
 
       // Change the doctor value to not busy, so everyone can book this doctor now
       Provider.of<DoctorProvider>(context, listen: false).setDoctor = newData;
-      await FirebaseFirestore.instance.doc('doctor/${newData.uid}').update({'is_busy': false});
+      await FirebaseFirestore.instance
+          .doc('doctor/${newData.uid}')
+          .update({'is_busy': false});
 
       // Update queue data to done,
-      await FirebaseFirestore.instance.doc('doctor/${currentDoctor!.uid}/queue/${queue.docId}').update({
+      await FirebaseFirestore.instance
+          .doc('doctor/${currentDoctor!.uid}/queue/${queue.docId}')
+          .update({
         'is_done': true,
       });
 
@@ -290,11 +249,16 @@ class _ConsultationPageState extends State<ConsultationPage> {
           now.day,
           queue.transactionData!.consultationSchedule!.startAt!.hour,
           queue.transactionData!.consultationSchedule!.startAt!.minute);
-      DateTime endAt = DateTime(now.year, now.month, now.day, queue.transactionData!.consultationSchedule!.endAt!.hour,
+      DateTime endAt = DateTime(
+          now.year,
+          now.month,
+          now.day,
+          queue.transactionData!.consultationSchedule!.endAt!.hour,
           queue.transactionData!.consultationSchedule!.endAt!.minute);
 
       Map<String, dynamic> dataSchedule = {
-        'day_schedule': queue.transactionData!.consultationSchedule!.daySchedule!.toJson(),
+        'day_schedule':
+            queue.transactionData!.consultationSchedule!.daySchedule!.toJson(),
         // Format the value to 00:00 PM, so we can get the data later as TimeOfDay
         'start_at': DateFormat("hh:mm a").format(startAt),
         'end_at': DateFormat("hh:mm a").format(endAt),
@@ -331,8 +295,10 @@ class _ConsultationPageState extends State<ConsultationPage> {
           .addDiagnosis(data, queue.transactionData!.createdBy!.uid);
 
       // Refresh queue data
-      await Provider.of<QueueProvider>(context, listen: false).get7Queue(queue.transactionData!.doctorProfile!.uid);
-      await Provider.of<QueueProvider>(context, listen: false).getAllQueue(queue.transactionData!.doctorProfile!.uid);
+      await Provider.of<QueueProvider>(context, listen: false)
+          .get7Queue(queue.transactionData!.doctorProfile!.uid);
+      await Provider.of<QueueProvider>(context, listen: false)
+          .getAllQueue(queue.transactionData!.doctorProfile!.uid);
     }
   }
 }

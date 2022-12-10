@@ -111,7 +111,7 @@ class _ConsultationScheduleDetailState
                             child: Padding(
                               padding: EdgeInsets.all(16.0),
                               child: Text(
-                                "Constultation Schedule Detail",
+                                "Edit Sharing car",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),

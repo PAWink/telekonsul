@@ -60,7 +60,8 @@ class _AddConsultationScheduleState extends State<AddConsultationSchedule> {
       if (pickedTime.hour == 23 && pickedTime.minute >= 29) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text("You musn't pick time past 23:29, because schedule are automatically added 30min on start time, so if it past 23:29 it will fall on tommorow"),
+            content: Text(
+                "You musn't pick time past 23:29, because schedule are automatically added 30min on start time, so if it past 23:29 it will fall on tommorow"),
             duration: Duration(seconds: 7),
             dismissDirection: DismissDirection.horizontal,
           ),
@@ -109,7 +110,7 @@ class _AddConsultationScheduleState extends State<AddConsultationSchedule> {
                           child: Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Text(
-                              "Add Consultation Schedule",
+                              "Add Sharing car",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -229,7 +230,7 @@ class _AddConsultationScheduleState extends State<AddConsultationSchedule> {
                                                 _isLoading = false;
                                               });
                                             },
-                                            child: const Text("Add Schedule"),
+                                            child: const Text("Post"),
                                             color:
                                                 AppTheme.lighterSecondaryColor,
                                             textColor: Colors.black,

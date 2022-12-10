@@ -3,7 +3,8 @@ part of '../pages.dart';
 class TransactionDetail extends StatefulWidget {
   final TransactionModel transaction;
 
-  const TransactionDetail({Key? key, required this.transaction}) : super(key: key);
+  const TransactionDetail({Key? key, required this.transaction})
+      : super(key: key);
   @override
   _TransactionDetailState createState() => _TransactionDetailState();
 }
@@ -35,14 +36,17 @@ class _TransactionDetailState extends State<TransactionDetail> {
                       flex: 2,
                       child: Text(
                         "Transaction ID #${transaction.docId}",
-                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w800),
                       ),
                     ),
                     Expanded(
                       flex: 1,
                       child: Text(
-                        DateFormat("dd MMMM yyyy").format(transaction.createdAt),
-                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                        DateFormat("dd MMMM yyyy")
+                            .format(transaction.createdAt),
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w800),
                       ),
                     ),
                   ],
@@ -59,25 +63,28 @@ class _TransactionDetailState extends State<TransactionDetail> {
                       children: [
                         const Text(
                           "Transaction Detail",
-                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900),
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w900),
                         ),
                         const SizedBox(
                           height: 15,
                         ),
-                        buildText("Doctor Name", transaction.doctorProfile!.name),
+                        buildText("Name", transaction.doctorProfile!.name),
                         const SizedBox(
                           height: 5,
                         ),
-                        buildText("Waktu Konsultasi",
+                        buildText("Time",
                             "${transaction.consultationSchedule!.startAt!.format(context)} - ${transaction.consultationSchedule!.endAt!.format(context)}"),
                         const SizedBox(
                           height: 5,
                         ),
-                        buildText("Phone Number", transaction.doctorProfile!.phoneNumber),
+                        buildText("Phone Number",
+                            transaction.doctorProfile!.phoneNumber),
                         const SizedBox(
                           height: 5,
                         ),
-                        buildText("Bank Account", transaction.doctorProfile!.bankAccount),
+                        buildText("Bank Account",
+                            transaction.doctorProfile!.bankAccount),
                         const SizedBox(
                           height: 5,
                         ),
@@ -89,8 +96,9 @@ class _TransactionDetailState extends State<TransactionDetail> {
                             ),
                             Expanded(
                               child: Text(
-                                "\$${NumberFormat("#,###").format(transaction.consultationSchedule!.price)}",
-                                style: const TextStyle(fontWeight: FontWeight.w800),
+                                "\B${NumberFormat("#,###").format(transaction.consultationSchedule!.price)}",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w800),
                               ),
                             ),
                           ],
@@ -131,7 +139,9 @@ class _TransactionDetailState extends State<TransactionDetail> {
                                     ? NetworkImage(transaction.paymentProof!)
                                     : (imageFile == null
                                         ? const AssetImage('assets/images.png')
-                                        : FileImage(imageFile!)) as ImageProvider<Object>,
+                                        : FileImage(
+                                            imageFile!)) as ImageProvider<
+                                        Object>,
                                 fit: BoxFit.contain,
                               ),
                               color: Colors.white,
@@ -147,14 +157,17 @@ class _TransactionDetailState extends State<TransactionDetail> {
                           ),
                         ),
                         const SizedBox(height: 8.0),
-                        Text("* Upload payment proof", style: Theme.of(context).textTheme.caption),
+                        Text("* Upload payment proof",
+                            style: Theme.of(context).textTheme.caption),
                         const SizedBox(height: 16.0),
                         _isLoading
                             ? const Center(
                                 child: CircularProgressIndicator(),
                               )
                             : const SizedBox(),
-                        transaction.status == "Waiting for Payment" && !_isDone && !_isLoading
+                        transaction.status == "Waiting for Payment" &&
+                                !_isDone &&
+                                !_isLoading
                             ? Center(
                                 child: MaterialButton(
                                   minWidth: 148,
@@ -165,7 +178,8 @@ class _TransactionDetailState extends State<TransactionDetail> {
                                   color: AppTheme.primaryColor,
                                   child: const Text(
                                     "Confirm Payment",
-                                    style: TextStyle(color: Colors.white, fontSize: 12),
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 12),
                                   ),
                                   onPressed: () async {
                                     setState(() {
@@ -175,16 +189,20 @@ class _TransactionDetailState extends State<TransactionDetail> {
                                     bool konfirmasi = await showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
-                                        title: const Text("Are you sure to confirm this payment?"),
+                                        title:
+                                            const Text("Confirm this payment?"),
                                         content: const Text(
-                                            "You'll be uploading the payment proof, and the doctor will be checking it"),
+                                            "Wait Sharing car will be checking it"),
                                         actions: [
                                           ElevatedButton(
-                                            onPressed: () => Navigator.of(context).pop(true),
+                                            onPressed: () =>
+                                                Navigator.of(context).pop(true),
                                             child: const Text("Yes"),
                                           ),
                                           TextButton(
-                                            onPressed: () => Navigator.of(context).pop(false),
+                                            onPressed: () =>
+                                                Navigator.of(context)
+                                                    .pop(false),
                                             child: const Text("Cancel"),
                                           ),
                                         ],
@@ -211,11 +229,12 @@ class _TransactionDetailState extends State<TransactionDetail> {
                           height: 76,
                           width: 339,
                           padding: const EdgeInsets.all(5),
-                          decoration:
-                              BoxDecoration(color: const Color(0xffE0E0E0), borderRadius: BorderRadius.circular(20)),
+                          decoration: BoxDecoration(
+                              color: const Color(0xffE0E0E0),
+                              borderRadius: BorderRadius.circular(20)),
                           child: const Center(
                             child: Text(
-                              "Please wait for the Doctor to contact\nYou via WhatsApp. Make sure your WhatsApp\nalways on!",
+                              "Wait Sharing car will be checking it",
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 12),
                             ),
@@ -232,7 +251,7 @@ class _TransactionDetailState extends State<TransactionDetail> {
                           ),
                           color: AppTheme.darkerPrimaryColor,
                           child: const Text(
-                            "Download Invoice",
+                            "Download",
                             style: TextStyle(color: Colors.white, fontSize: 12),
                           ),
                           onPressed: () async {
@@ -268,14 +287,16 @@ class _TransactionDetailState extends State<TransactionDetail> {
 
     pdf.addPage(
       pw.MultiPage(
-        pageFormat: PdfPageFormat.letter.copyWith(marginBottom: 1.5 * PdfPageFormat.cm),
+        pageFormat:
+            PdfPageFormat.letter.copyWith(marginBottom: 1.5 * PdfPageFormat.cm),
         crossAxisAlignment: pw.CrossAxisAlignment.start,
         header: (pw.Context context) {
           return pw.Container(
             alignment: pw.Alignment.center,
             margin: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
             padding: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
-            child: pw.Text('Invoice #${data.docId}', style: pw.Theme.of(context).header3),
+            child: pw.Text('Pay #${data.docId}',
+                style: pw.Theme.of(context).header3),
           );
         },
         build: (pw.Context context) => <pw.Widget>[
@@ -285,7 +306,7 @@ class _TransactionDetailState extends State<TransactionDetail> {
               headers: <String>[
                 'No',
                 'Name',
-                'Consultation Time',
+                'Time',
                 'Price',
               ],
               headerStyle: pw.TextStyle(
@@ -299,9 +320,9 @@ class _TransactionDetailState extends State<TransactionDetail> {
               data: <List<String>>[
                 <String>[
                   '1',
-                  'Consultation ${data.doctorProfile!.name} Specialist ${data.doctorProfile!.specialist}',
+                  '${data.doctorProfile!.name}  ${data.doctorProfile!.specialist}',
                   '${data.consultationSchedule!.startAt!.format(ctx)} - ${data.consultationSchedule!.endAt!.format(ctx)}',
-                  '\$${NumberFormat("#,###").format(data.consultationSchedule!.price)}'
+                  '\B${NumberFormat("#,###").format(data.consultationSchedule!.price)}'
                 ],
               ]),
           pw.Paragraph(text: ""),
@@ -309,11 +330,11 @@ class _TransactionDetailState extends State<TransactionDetail> {
             mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
             children: [
               pw.Expanded(
-                child: pw.Text("Transaction Status : ${data.status}"),
+                child: pw.Text("Status : ${data.status}"),
               ),
               pw.Expanded(
                 child: pw.Text(
-                  "Total : \$${NumberFormat("#,###").format(data.consultationSchedule!.price)}",
+                  "Total : \B${NumberFormat("#,###").format(data.consultationSchedule!.price)}",
                 ),
               ),
             ],
@@ -367,7 +388,8 @@ class _TransactionDetailState extends State<TransactionDetail> {
     await _updateBuktiPembayaran();
 
     // Refresh transaction
-    await Provider.of<TransactionProvider>(context, listen: false).getAllTransaction(false, transaction.createdBy!.uid);
+    await Provider.of<TransactionProvider>(context, listen: false)
+        .getAllTransaction(false, transaction.createdBy!.uid);
   }
 
   imgSourceDialog() async {
@@ -386,7 +408,8 @@ class _TransactionDetailState extends State<TransactionDetail> {
                 ),
                 child: IconButton(
                   icon: const Icon(Icons.photo_camera, color: Colors.white),
-                  onPressed: () => Navigator.of(context).pop(ImageSource.camera),
+                  onPressed: () =>
+                      Navigator.of(context).pop(ImageSource.camera),
                 ),
               ),
               Ink(
@@ -396,7 +419,8 @@ class _TransactionDetailState extends State<TransactionDetail> {
                 ),
                 child: IconButton(
                   icon: const Icon(Icons.photo, color: Colors.white),
-                  onPressed: () => Navigator.of(context).pop(ImageSource.gallery),
+                  onPressed: () =>
+                      Navigator.of(context).pop(ImageSource.gallery),
                 ),
               ),
             ],
@@ -478,8 +502,9 @@ class _TransactionDetailState extends State<TransactionDetail> {
       String fileName = imageFile!.path.split("/").last;
 
       // Get firebase storage reference (Firebase Storage path)
-      firebase_storage.Reference ref =
-          firebase_storage.FirebaseStorage.instance.ref().child('Payment Proof/${dataAuth.currentUser!.uid}/$fileName');
+      firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+          .ref()
+          .child('Payment Proof/${dataAuth.currentUser!.uid}/$fileName');
 
       // Save the image to firebase storage
       final dataImage = await ref.putFile(imageFile!);
@@ -488,7 +513,8 @@ class _TransactionDetailState extends State<TransactionDetail> {
       String photoPath = await dataImage.ref.getDownloadURL();
 
       // Confirm Payment
-      await Provider.of<TransactionProvider>(context, listen: false).confirmPayment(
+      await Provider.of<TransactionProvider>(context, listen: false)
+          .confirmPayment(
         transaction.docId,
         transaction.doctorProfile!.uid,
         photoPath,

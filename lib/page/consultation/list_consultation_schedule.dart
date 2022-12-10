@@ -50,28 +50,6 @@ class _ListConsultationScheduleState extends State<ListConsultationSchedule> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  _isLoading
-                      ? const CircularProgressIndicator()
-                      : MaterialButton(
-                          onPressed: () async {
-                            setState(() {
-                              _isLoading = true;
-                            });
-
-                            await _downloadData(
-                                context, value.listConsultationSchedule);
-
-                            setState(() {
-                              _isLoading = false;
-                            });
-                          },
-                          child: const Text("Download List"),
-                          color: AppTheme.primaryColor,
-                          textColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
                 ],
               ),
               const SizedBox(height: 16.0),

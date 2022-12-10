@@ -240,23 +240,6 @@ class _ListDoctorQueueState extends State<ListDoctorQueue> {
                       ),
                     ),
                     const SizedBox(height: 4.0),
-                    MaterialButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => ConsultationPage(
-                              queue: item,
-                            ),
-                          ),
-                        );
-                      },
-                      color: AppTheme.primaryColor,
-                      textColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: const Text("Start consultation"),
-                    ),
                   ],
                 ),
               ),
