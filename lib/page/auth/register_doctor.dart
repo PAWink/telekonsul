@@ -14,11 +14,11 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
 
   String _genderValue = 'Male';
 
-  String? selectedSpecialist = "General practitioners";
+  String? selectedSpecialist = "Student";
   List<String> specialist = [
-    "General practitioners",
-    "Surgeon",
-    "Dentist",
+    "Student",
+    "Professor",
+    "Personnel",
   ];
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -117,7 +117,9 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
                   ),
                   Container(
                     decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(35), topRight: Radius.circular(35)),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(35),
+                          topRight: Radius.circular(35)),
                       color: AppTheme.darkerPrimaryColor,
                     ),
                     child: Column(
@@ -125,7 +127,10 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
                         const SizedBox(height: 30),
                         const Text(
                           "Register Doctor",
-                          style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700),
                         ),
                         const SizedBox(height: 10),
                         Padding(
@@ -165,7 +170,8 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
                                     return null;
                                   },
                                   onFieldSubmitted: (value) {
-                                    FocusScope.of(context).requestFocus(_fnEmail);
+                                    FocusScope.of(context)
+                                        .requestFocus(_fnEmail);
                                   },
                                 ),
                                 const SizedBox(height: 16),
@@ -202,7 +208,8 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
                                     return null;
                                   },
                                   onFieldSubmitted: (value) {
-                                    FocusScope.of(context).requestFocus(_fnPassword);
+                                    FocusScope.of(context)
+                                        .requestFocus(_fnPassword);
                                   },
                                 ),
                                 const SizedBox(height: 16),
@@ -239,7 +246,8 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
                                     return null;
                                   },
                                   onFieldSubmitted: (value) {
-                                    FocusScope.of(context).requestFocus(_fnPhoneNumber);
+                                    FocusScope.of(context)
+                                        .requestFocus(_fnPhoneNumber);
                                   },
                                 ),
                                 const SizedBox(height: 16),
@@ -272,19 +280,21 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
                                       return 'You must fill this field';
                                     }
 
-                                    if (value.length < 10 || value.length > 16) {
+                                    if (value.length < 10 ||
+                                        value.length > 16) {
                                       return 'Must more than 10 and less than 16';
                                     }
 
                                     return null;
                                   },
                                   onFieldSubmitted: (value) {
-                                    FocusScope.of(context).requestFocus(_fnAddress);
+                                    FocusScope.of(context)
+                                        .requestFocus(_fnAddress);
                                   },
                                 ),
                                 const SizedBox(height: 16),
                                 const Text(
-                                  "Address",
+                                  "Faculty",
                                 ),
                                 const SizedBox(height: 4),
                                 TextFormField(
@@ -299,7 +309,7 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
                                     filled: true,
                                     counterText: "",
                                     fillColor: Colors.white,
-                                    hintText: 'Address',
+                                    hintText: 'Faculty',
                                     errorStyle: const TextStyle(
                                       color: Colors.amber,
                                     ),
@@ -310,7 +320,7 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
                                 ),
                                 const SizedBox(height: 16),
                                 const Text(
-                                  "Gender",
+                                  "Car",
                                 ),
                                 const SizedBox(height: 4),
                                 Row(
@@ -319,27 +329,31 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
                                       value: 0,
                                       groupValue: _radioValue,
                                       onChanged: _handleRadioValueChange,
-                                      fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
+                                      fillColor: MaterialStateColor.resolveWith(
+                                          (states) => Colors.white),
                                     ),
                                     const Text(
-                                      'Male',
-                                      style: TextStyle(fontSize: 12, color: Colors.white),
+                                      'Car',
+                                      style: TextStyle(
+                                          fontSize: 12, color: Colors.white),
                                     ),
                                     Radio(
                                       value: 1,
                                       groupValue: _radioValue,
                                       onChanged: _handleRadioValueChange,
-                                      fillColor: MaterialStateColor.resolveWith((states) => Colors.white),
+                                      fillColor: MaterialStateColor.resolveWith(
+                                          (states) => Colors.white),
                                     ),
                                     const Text(
-                                      'Female',
-                                      style: TextStyle(fontSize: 12, color: Colors.white),
+                                      'Mortorcycle',
+                                      style: TextStyle(
+                                          fontSize: 12, color: Colors.white),
                                     ),
                                   ],
                                 ),
                                 const SizedBox(height: 16),
                                 const Text(
-                                  "Choose Specialist",
+                                  "Who you are?",
                                 ),
                                 const SizedBox(height: 4),
                                 Card(
@@ -347,7 +361,8 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
                                     borderRadius: BorderRadius.circular(16.0),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 16),
                                     child: DropdownButton(
                                       isExpanded: true,
                                       underline: const SizedBox(),
@@ -405,7 +420,8 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
                         const SizedBox(height: 32),
                         _isLoading
                             ? const CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(Colors.white),
                               )
                             : SizedBox(
                                 height: height / 18,
@@ -462,7 +478,7 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
       });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("You must choose gender"),
+          content: Text("You must choose car"),
         ),
       );
       return;
@@ -474,7 +490,7 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
       });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("You must choose specialist"),
+          content: Text("You must choose who you are"),
         ),
       );
       return;
@@ -482,7 +498,8 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
 
     try {
       // Creating new user
-      final dataAuth = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final dataAuth =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _txtEmail.text,
         password: _txtPassword.text,
       );

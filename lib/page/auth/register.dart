@@ -254,7 +254,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                                 const SizedBox(height: 16),
                                 const Text(
-                                  "Address",
+                                  "Faculty",
                                 ),
                                 const SizedBox(height: 4.0),
                                 TextFormField(
@@ -269,7 +269,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     filled: true,
                                     counterText: "",
                                     fillColor: Colors.white,
-                                    hintText: 'Address',
+                                    hintText: 'Faculty',
                                     errorStyle: const TextStyle(
                                       color: Colors.amber,
                                     ),

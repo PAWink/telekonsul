@@ -93,7 +93,7 @@ class _LandingPageState extends State<LandingPage> {
                                   (states) => Colors.white),
                             ),
                             const Text(
-                              'have a car',
+                              'don\'t have a car',
                               style:
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),
@@ -108,7 +108,7 @@ class _LandingPageState extends State<LandingPage> {
                                   (states) => Colors.white),
                             ),
                             const Text(
-                              'don\'t have a car',
+                              'have a car',
                               style:
                                   TextStyle(fontSize: 12, color: Colors.white),
                             ),

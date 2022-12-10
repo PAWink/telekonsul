@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                                             filled: true,
                                             counterText: "",
                                             fillColor: Colors.white,
-                                            hintText: 'email@example.com',
+                                            hintText: 'email@gmail.com',
                                             errorStyle: const TextStyle(
                                               color: Colors.amber,
                                             ),
