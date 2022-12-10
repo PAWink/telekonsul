@@ -14,7 +14,9 @@ ConsultationSchedule _$ConsultationScheduleFromJson(Map<String, dynamic> json) {
         : DaySchedule.fromJson(json['day_schedule'] as Map<String, dynamic>)
     ..startAt = ConsultationSchedule._fromJson(json['start_at'] as String)
     ..endAt = ConsultationSchedule._fromJson(json['end_at'] as String)
-    ..price = (json['price'] as num?)?.toDouble();
+    ..price = (json['price'] as num?)?.toDouble()
+    ..start = json['start'] as String?
+    ..finish = json['finish'] as String?;
 }
 
 Map<String, dynamic> _$ConsultationScheduleToJson(
@@ -25,6 +27,8 @@ Map<String, dynamic> _$ConsultationScheduleToJson(
       'start_at': ConsultationSchedule._toJson(instance.startAt),
       'end_at': ConsultationSchedule._toJson(instance.endAt),
       'price': instance.price,
+      'start': instance.start,
+      'finish': instance.finish,
     };
 
 DaySchedule _$DayScheduleFromJson(Map<String, dynamic> json) {

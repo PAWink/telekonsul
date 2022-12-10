@@ -21,8 +21,6 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const Toolbar(),
-              const SizedBox(height: 8),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.4,
                 width: MediaQuery.of(context).size.width * 1,
@@ -75,7 +73,7 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
                     Row(
                       children: [
                         const Text(
-                          "Time:",
+                          "Time       :",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
@@ -89,15 +87,19 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
                               .map(
                                 (e) => Container(
                                   decoration: BoxDecoration(
-                                    color: AppTheme.secondaryColor,
+                                    gradient: LinearGradient(
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                        colors: [Colors.pink, Colors.blue]),
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
                                       "${e.startAt!.format(context)} - ${e.endAt!.format(context)}",
-                                      style:
-                                          const TextStyle(color: Colors.black),
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
@@ -106,24 +108,54 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16.0),
-                    const Text(
-                      "Faculty:",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Row(
+                        children: [
+                          const Text(
+                            "Location :  ",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          const SizedBox(width: 8.0),
+                          Container(
+                            child: dataDoctor.consultationSchedule
+                                .where((element) =>
+                                    element.daySchedule!.intValue ==
+                                    DateTime.now().weekday)
+                                .map(
+                                  (e) => Container(
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                          begin: Alignment.centerLeft,
+                                          end: Alignment.centerRight,
+                                          colors: [Colors.pink, Colors.blue]),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        " ${e.start} - ${e.finish}",
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                .first,
+                          ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(height: 8.0),
-                    ListTile(
-                      leading: Image.asset('assets/hospital.png'),
-                      title: Text("${dataDoctor.doctor.address}"),
                     ),
                     const SizedBox(height: 16.0),
                     Row(
                       children: [
-                        const SizedBox(width: 22),
+                        const SizedBox(height: 22),
                         const Text(
-                          "Price :",
+                          "Faculty   :",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
@@ -134,8 +166,76 @@ class _ConsultationDetailState extends State<ConsultationDetail> {
                                 element.daySchedule!.intValue ==
                                 DateTime.now().weekday)
                             .map(
-                              (e) => Text(
-                                "\B${NumberFormat("#,###").format(e.price)}",
+                              (e) => Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                      colors: [Colors.pink, Colors.blue]),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "${dataDoctor.doctor.address}",
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            )
+                            .first,
+                      ],
+                    ),
+                    // Container(
+                    //   ch: [
+                    //     const Text(
+                    //       "Faculty   :",
+                    //       style: TextStyle(
+                    //         fontWeight: FontWeight.bold,
+                    //       ),
+                    //     ),
+                    //     Text("${dataDoctor.doctor.address}",
+                    //       style: const TextStyle(
+                    //         color: Colors.black,
+                    //         fontWeight: FontWeight.bold),
+                    //     ),
+                    //   ],
+                    // ),
+                    const SizedBox(height: 16.0),
+                    Row(
+                      children: [
+                        const SizedBox(height: 22),
+                        const Text(
+                          "Price       :",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        dataDoctor.consultationSchedule
+                            .where((element) =>
+                                element.daySchedule!.intValue ==
+                                DateTime.now().weekday)
+                            .map(
+                              (e) => Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                      colors: [Colors.pink, Colors.blue]),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "\B${NumberFormat("#,###").format(e.price)}",
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
                               ),
                             )
                             .first,

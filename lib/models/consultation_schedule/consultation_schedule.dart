@@ -21,6 +21,12 @@ class ConsultationSchedule {
   @JsonKey(name: "price")
   double? price;
 
+  @JsonKey(name: "start") //
+  String? start;
+
+  @JsonKey(name: "finish") //
+  String? finish;
+
   ConsultationSchedule();
 
   factory ConsultationSchedule.fromJson(Map<String, dynamic> json) =>

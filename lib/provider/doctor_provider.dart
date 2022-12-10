@@ -32,7 +32,8 @@ class DoctorProvider with ChangeNotifier {
     _listDoctor.clear();
 
     // Getting the data from doctor collection
-    final dataDoctor = await FirebaseFirestore.instance.collection('doctor').get();
+    final dataDoctor =
+        await FirebaseFirestore.instance.collection('doctor').get();
 
     // if it empty, it will be returned with no value
     if (dataDoctor.docs.isEmpty) {
@@ -69,7 +70,8 @@ class DoctorProvider with ChangeNotifier {
       }
 
       // If not we update the consultation schedule element
-      element.consultationSchedule.addAll(dataJadwal.docs.map((e) => ConsultationSchedule.fromJson(e.data())));
+      element.consultationSchedule.addAll(
+          dataJadwal.docs.map((e) => ConsultationSchedule.fromJson(e.data())));
 
       // And checking whether the user already book this doctor or not, with the method that I already made in this class too
       element.isBooked = await checkIfBooked(element.doctor.uid, userUid);
@@ -78,8 +80,8 @@ class DoctorProvider with ChangeNotifier {
     // Get the doctor where, the consultation schedule are today, based on day intValue
     // Monday is (1) .... Sunday (7)
     _listDoctor = _listDoctor
-        .where((element) =>
-            element.consultationSchedule.any((element) => element.daySchedule!.intValue == DateTime.now().weekday))
+        .where((element) => element.consultationSchedule.any((element) =>
+            element.daySchedule!.intValue == DateTime.now().weekday))
         .toList();
 
     // We only show 7 data in user mainPage
@@ -99,8 +101,10 @@ class DoctorProvider with ChangeNotifier {
     _isLoadingSpecialist = true;
     _listSpecialistDoctor.clear();
 
-    final dataDoctor =
-        await FirebaseFirestore.instance.collection('doctor').where('specialist', isEqualTo: specialist).get();
+    final dataDoctor = await FirebaseFirestore.instance
+        .collection('doctor')
+        .where('specialist', isEqualTo: specialist)
+        .get();
 
     if (dataDoctor.docs.isEmpty) {
       _isLoadingSpecialist = false;
@@ -129,13 +133,14 @@ class DoctorProvider with ChangeNotifier {
         return;
       }
 
-      element.consultationSchedule.addAll(dataJadwal.docs.map((e) => ConsultationSchedule.fromJson(e.data())));
+      element.consultationSchedule.addAll(
+          dataJadwal.docs.map((e) => ConsultationSchedule.fromJson(e.data())));
 
       element.isBooked = await checkIfBooked(element.doctor.uid, userUid);
     });
     _listSpecialistDoctor = _listSpecialistDoctor
-        .where((element) =>
-            element.consultationSchedule.any((element) => element.daySchedule!.intValue == DateTime.now().weekday))
+        .where((element) => element.consultationSchedule.any((element) =>
+            element.daySchedule!.intValue == DateTime.now().weekday))
         .toList();
     _isLoadingSpecialist = false;
     notifyListeners();
@@ -170,20 +175,25 @@ class DoctorProvider with ChangeNotifier {
     dataQueue.addAll(dataQueueDoctor.docs.map((e) => Queue.fromJson(e.data())));
 
     // Tommorow
-    DateTime before = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 1);
+    DateTime before = DateTime(
+        DateTime.now().year, DateTime.now().month, DateTime.now().day + 1);
 
     // Yesterday
-    DateTime after = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day - 1, 24, 0);
+    DateTime after = DateTime(DateTime.now().year, DateTime.now().month,
+        DateTime.now().day - 1, 24, 0);
 
     // Checking for today queue
     dataQueue = dataQueue
         .where(
-          (element) => element.createdAt.isBefore(before) && element.createdAt.isAfter(after),
+          (element) =>
+              element.createdAt.isBefore(before) &&
+              element.createdAt.isAfter(after),
         )
         .toList();
 
     // Checking if the transaction are created by the user or not, which mean the user already book the doctor if it created by him and hasn't done yet
-    isBooked = dataQueue.any((element) => element.transactionData!.createdBy!.uid == userUid);
+    isBooked = dataQueue
+        .any((element) => element.transactionData!.createdBy!.uid == userUid);
 
     return isBooked;
   }

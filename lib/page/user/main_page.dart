@@ -217,7 +217,7 @@ class _MainPageState extends State<MainPage> {
                     height: 5,
                   ),
                   Text(
-                    "${item.consultationSchedule.start} - ${item.consultationSchedule.finish}",
+                    "${item.doctor.start} - ${item.doctor.finish}",
                     style: const TextStyle(
                         color: Colors.red,
                         fontSize: 12,
