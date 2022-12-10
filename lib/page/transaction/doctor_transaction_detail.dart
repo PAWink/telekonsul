@@ -340,7 +340,7 @@ class _DoctorTransactionDetailState extends State<DoctorTransactionDetail> {
               ),
               pw.Expanded(
                 child: pw.Text(
-                  "Total : \$${NumberFormat("#,###").format(data.consultationSchedule!.price)}",
+                  "Total : \B${NumberFormat("#,###").format(data.consultationSchedule!.price)}",
                 ),
               ),
             ],

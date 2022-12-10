@@ -76,7 +76,7 @@ class _MainPageState extends State<MainPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
                     Text(
-                      "Who go with you Today",
+                      "Sharing car Today",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
                       textAlign: TextAlign.start,
@@ -98,7 +98,7 @@ class _MainPageState extends State<MainPage> {
                     if (value.listDoctor.isEmpty) {
                       return const Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: Text("There's no go with you today"),
+                        child: Text("No Sharing car today"),
                       );
                     }
 
@@ -129,7 +129,7 @@ class _MainPageState extends State<MainPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
                     Text(
-                      "Choose who you want to go",
+                      "Who you want to go?",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
                       textAlign: TextAlign.start,
@@ -173,14 +173,14 @@ class _MainPageState extends State<MainPage> {
       BuildContext context) {
     return Container(
       height: 146,
-      margin: const EdgeInsets.only(bottom: 10, right: 8),
+      margin: const EdgeInsets.only(bottom: 2, right: 8),
       child: Card(
         elevation: 4,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const SizedBox(
-              width: 8,
+              width: 5,
             ),
             CircleAvatar(
               radius: 32,
@@ -212,6 +212,16 @@ class _MainPageState extends State<MainPage> {
                         color: AppTheme.darkerPrimaryColor,
                         fontSize: 12,
                         fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "${item.consultationSchedule.start} - ${item.consultationSchedule.finish}",
+                    style: const TextStyle(
+                        color: Colors.red,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900),
                   ),
                   const SizedBox(
                     height: 5,

@@ -16,9 +16,15 @@ class Doctor {
 
   @JsonKey(name: "phone_number")
   String? phoneNumber;
-
+//เพิ่มแล้ว1
   @JsonKey(name: "address")
   String? address;
+
+  @JsonKey(name: "start") //
+  String? start; //
+
+  @JsonKey(name: "finish") //
+  String? finish; //
 
   @JsonKey(name: "gender")
   String? gender;

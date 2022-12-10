@@ -18,6 +18,12 @@ class UserModel {
 
   @JsonKey(name: "address")
   String? address;
+  //เพิ่มแล้ว2
+  @JsonKey(name: "start") //
+  String? start;
+
+  @JsonKey(name: "finish") //
+  String? finish;
 
   @JsonKey(name: "profile_url")
   String? profileUrl;

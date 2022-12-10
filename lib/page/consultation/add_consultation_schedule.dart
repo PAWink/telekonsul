@@ -47,6 +47,21 @@ class _AddConsultationScheduleState extends State<AddConsultationSchedule> {
 
   final TextEditingController _txtPrice = TextEditingController();
   final FocusNode _fnPrice = FocusNode();
+  //เพิ่มแล้ว2
+  final TextEditingController _txtStart = TextEditingController(); //
+  final FocusNode _fnStart = FocusNode(); //
+
+  final TextEditingController _txtFinish = TextEditingController(); //
+  final FocusNode _fnFinish = FocusNode(); //
+  //เพิ่มแล้ว2
+  @override //
+  void dispose() {
+    _txtStart.dispose();
+    _fnStart.dispose();
+    _txtFinish.dispose();
+    _fnFinish.dispose();
+    super.dispose();
+  } //
 
   bool _isLoading = false;
 
@@ -176,6 +191,59 @@ class _AddConsultationScheduleState extends State<AddConsultationSchedule> {
                                       : const Text("Pick Time"),
                                 ),
                                 const SizedBox(height: 12.0),
+                                ///////////////////////////////////////////////////////////////////////
+                                const Text(
+                                  "Start",
+                                ),
+                                const SizedBox(height: 4),
+                                TextFormField(
+                                  focusNode: _fnStart,
+                                  controller: _txtStart,
+                                  keyboardType: TextInputType.streetAddress,
+                                  maxLength: 50,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    filled: true,
+                                    counterText: "",
+                                    fillColor: Colors.white,
+                                    hintText: 'Start',
+                                    errorStyle: const TextStyle(
+                                      color: Colors.amber,
+                                    ),
+                                  ),
+                                  onFieldSubmitted: (value) {
+                                    FocusScope.of(context).unfocus();
+                                  },
+                                ),
+                                const SizedBox(height: 4.0),
+                                const Text(
+                                  "Finish",
+                                ),
+                                const SizedBox(height: 4),
+                                TextFormField(
+                                  focusNode: _fnFinish,
+                                  controller: _txtFinish,
+                                  keyboardType: TextInputType.streetAddress,
+                                  maxLength: 50,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    filled: true,
+                                    counterText: "",
+                                    fillColor: Colors.white,
+                                    hintText: 'Finish',
+                                    errorStyle: const TextStyle(
+                                      color: Colors.amber,
+                                    ),
+                                  ),
+                                  onFieldSubmitted: (value) {
+                                    FocusScope.of(context).unfocus();
+                                  },
+                                ),
+                                /////////////////////////////////////////////////////////////////////////
                                 const Text("Price"),
                                 const SizedBox(height: 4.0),
                                 TextFormField(
@@ -298,6 +366,9 @@ class _AddConsultationScheduleState extends State<AddConsultationSchedule> {
       'end_at': DateFormat("hh:mm a").format(endAt),
       // Parse the price, removing , (coma)
       'price': format.parse(_txtPrice.text),
+      //เพิ่มแล้ว2
+      'start': _txtStart.text, //
+      'finish': _txtFinish.text, //
     };
 
     await Provider.of<ConsultationScheduleProvider>(context, listen: false)

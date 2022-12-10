@@ -367,7 +367,7 @@ class _ListDoctorTransactionState extends State<ListDoctorTransaction> {
               headers: <String>[
                 'No',
                 'Transaction ID',
-                'Sub Total',
+                'Total',
                 'Status',
                 'Created at',
               ],
@@ -384,7 +384,7 @@ class _ListDoctorTransactionState extends State<ListDoctorTransaction> {
                   <String>[
                     '${i + 1}',
                     '${data[i].docId}',
-                    '\$${data[i].consultationSchedule!.price}',
+                    '\B${data[i].consultationSchedule!.price}',
                     '${data[i].status}',
                     (DateFormat("dd MMMM yyyy").format(data[i].createdAt)),
                   ],
@@ -395,7 +395,7 @@ class _ListDoctorTransactionState extends State<ListDoctorTransaction> {
               children: [
                 pw.Text("Total : ${data.length}"),
                 pw.Text(
-                    "Earning : \$${NumberFormat("#,###").format(earning)},-"),
+                    "Earning : \B${NumberFormat("#,###").format(earning)},-"),
               ]),
           pw.Paragraph(
             text: "Success : $success",
