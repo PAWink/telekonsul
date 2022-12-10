@@ -202,7 +202,7 @@ class _ListPasienState extends State<ListPasien> {
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Address: ${item.address}"),
+                Text("Faculty: ${item.address}"),
                 Text("Phone Number: ${item.phoneNumber}"),
               ],
             ),
