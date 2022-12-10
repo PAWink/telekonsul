@@ -12,7 +12,7 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
 
   int? _radioValue = 0;
 
-  String _genderValue = 'Male';
+  String _genderValue = 'Car';
 
   String? selectedSpecialist = "Student";
   List<String> specialist = [
@@ -47,10 +47,10 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
     });
     switch (_radioValue) {
       case 0:
-        _genderValue = 'Male';
+        _genderValue = 'Car';
         break;
       case 1:
-        _genderValue = 'Female';
+        _genderValue = 'Mortorcycle';
         break;
     }
   }
@@ -126,7 +126,7 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
                       children: [
                         const SizedBox(height: 30),
                         const Text(
-                          "Register Doctor",
+                          "Register Sharing car",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
