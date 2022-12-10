@@ -121,7 +121,7 @@ class _ListPasienState extends State<ListPasien> {
                 'No',
                 'Name',
                 'Email',
-                'Address',
+                'Faculty',
                 'Phone Number',
               ],
               headerStyle: pw.TextStyle(
