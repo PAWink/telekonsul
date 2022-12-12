@@ -29,6 +29,12 @@ class TransactionModel {
   @JsonKey(name: "created_by")
   UserModel? createdBy;
 
+  @JsonKey(name: "start") //
+  ConsultationSchedule? start;
+
+  @JsonKey(name: "finish") //
+  ConsultationSchedule? finish;
+
   TransactionModel();
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>

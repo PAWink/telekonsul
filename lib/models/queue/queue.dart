@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:telekonsul/models/consultation_schedule/consultation_schedule.dart';
 import 'package:telekonsul/models/transaction/transaction_model.dart';
 
 part 'queue.g.dart';
@@ -20,6 +21,12 @@ class Queue {
 
   @JsonKey(name: "created_at", fromJson: _fromJson, toJson: _toJson)
   late DateTime createdAt;
+
+  @JsonKey(name: "start") //
+  ConsultationSchedule? start;
+
+  @JsonKey(name: "finish") //
+  ConsultationSchedule? finish;
 
   Queue();
 

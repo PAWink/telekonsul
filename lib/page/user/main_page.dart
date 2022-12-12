@@ -214,9 +214,9 @@ class _MainPageState extends State<MainPage> {
                     height: 5,
                   ),
                   Text(
-                    "${itemKonsultasi.start} - ${itemKonsultasi.finish}",
+                    "Start: ${itemKonsultasi.start} - Finish: ${itemKonsultasi.finish}",
                     style: const TextStyle(
-                        color: Colors.red,
+                        color: Colors.green,
                         fontSize: 12,
                         fontWeight: FontWeight.w900),
                   ),

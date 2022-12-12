@@ -31,7 +31,7 @@ class _ConsultationPageState extends State<ConsultationPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(30.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -262,6 +262,7 @@ class _ConsultationPageState extends State<ConsultationPage> {
         'start_at': DateFormat("hh:mm a").format(startAt),
         'end_at': DateFormat("hh:mm a").format(endAt),
         'price': queue.transactionData!.consultationSchedule!.price,
+        'start': queue.transactionData!.consultationSchedule!.start,
       };
 
       Map<String, dynamic> transactionData = {
