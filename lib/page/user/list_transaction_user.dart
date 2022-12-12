@@ -50,59 +50,6 @@ class _ListTransactionUserState extends State<ListTransactionUser> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16.0),
-                  TextFormField(
-                    controller: _controller,
-                    focusNode: _focusNode,
-                    textCapitalization: TextCapitalization.words,
-                    decoration: InputDecoration(
-                      prefixIcon: IconButton(
-                        icon: const Icon(Icons.search),
-                        onPressed: () {},
-                      ),
-                      suffixIcon: IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: () {
-                            setState(() {
-                              _controller.clear();
-                              _focusNode.unfocus();
-                              _searchResult.clear();
-                              _isEmpty = false;
-                            });
-                          }),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      hintText: "Search transaction by status",
-                    ),
-                    onChanged: (query) {
-                      if (query.isEmpty || query == "") {
-                        setState(() {
-                          _searchResult.clear();
-                          _isEmpty = false;
-                        });
-                        return;
-                      }
-
-                      _searchResult.clear();
-                      for (var element in value.listTransaction) {
-                        if (element.status!.contains(query)) {
-                          setState(() {
-                            _searchResult.add(element);
-                            _isEmpty = false;
-
-                            return;
-                          });
-                        }
-                      }
-
-                      if (_searchResult.isEmpty) {
-                        setState(() {
-                          _isEmpty = true;
-                        });
-                      }
-                    },
-                  ),
-                  const SizedBox(height: 16.0),
                   _isEmpty
                       ? const Center(
                           child: Text("Search result empty"),

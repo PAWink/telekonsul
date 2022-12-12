@@ -222,9 +222,6 @@ class _TransactionDetailState extends State<TransactionDetail> {
                                 ),
                               )
                             : Container(),
-                        const SizedBox(
-                          height: 16,
-                        ),
                         Container(
                           height: 76,
                           width: 339,
@@ -239,9 +236,6 @@ class _TransactionDetailState extends State<TransactionDetail> {
                               style: TextStyle(fontSize: 12),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 16,
                         ),
                         MaterialButton(
                           minWidth: 148,
@@ -295,8 +289,8 @@ class _TransactionDetailState extends State<TransactionDetail> {
             alignment: pw.Alignment.center,
             margin: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
             padding: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
-            child: pw.Text('Pay #${data.docId}',
-                style: pw.Theme.of(context).header3),
+            child:
+                pw.Text('You have to pay', style: pw.Theme.of(context).header3),
           );
         },
         build: (pw.Context context) => <pw.Widget>[

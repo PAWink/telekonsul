@@ -94,23 +94,17 @@ class _MainPageState extends State<MainPage> {
                         ),
                       );
                     }
-
                     if (value.listDoctor.isEmpty) {
                       return const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text("No Sharing car today"),
                       );
                     }
-
                     return SizedBox(
                       height: 150,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
-
-
-
-
                         itemCount: value.listDoctor.length,
                         itemBuilder: (context, index) {
                           final item = value.listDoctor[index];
@@ -119,11 +113,6 @@ class _MainPageState extends State<MainPage> {
                                   element.daySchedule!.intValue ==
                                   DateTime.now().weekday)
                               .first;
-
-
-
-                              
-
                           return _doctorCard(item, itemKonsultasi, context);
                         },
                       ),
@@ -225,7 +214,7 @@ class _MainPageState extends State<MainPage> {
                     height: 5,
                   ),
                   Text(
-                    "${item.doctor.start} - ${item.doctor.finish}",
+                    "${itemKonsultasi.start} - ${itemKonsultasi.finish}",
                     style: const TextStyle(
                         color: Colors.red,
                         fontSize: 12,
