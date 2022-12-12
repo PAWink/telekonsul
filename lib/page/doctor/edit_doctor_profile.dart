@@ -113,7 +113,6 @@ class _EditDoctorProfileState extends State<EditDoctorProfile> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        const Toolbar(),
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height * 0.2,

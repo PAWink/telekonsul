@@ -38,8 +38,7 @@ class _DoctorTransactionDetailState extends State<DoctorTransactionDetail> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Toolbar(),
-            const SizedBox(height: 8.0),
+            const SizedBox(height: 40.0),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 13),
               child: Row(
@@ -187,7 +186,6 @@ class _DoctorTransactionDetailState extends State<DoctorTransactionDetail> {
                         child: Text("* Payment Proof",
                             style: Theme.of(context).textTheme.caption),
                       ),
-                      const SizedBox(height: 16.0),
                       Center(
                         child: _isLoading
                             ? const CircularProgressIndicator()

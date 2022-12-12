@@ -38,7 +38,6 @@ class _ListDiagnosisUserState extends State<ListDiagnosisUser> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Toolbar(),
                 const SizedBox(height: 16.0),
                 const Text(
                   "List Diagnosis",

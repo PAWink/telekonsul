@@ -62,7 +62,6 @@ class _ListDoctorSpecialistState extends State<ListDoctorSpecialist> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Toolbar(),
                   const SizedBox(height: 16.0),
                   Text(
                     "List ${widget.specialist}",

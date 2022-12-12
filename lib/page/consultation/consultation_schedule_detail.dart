@@ -52,7 +52,11 @@ class _ConsultationScheduleDetailState
 
   final TextEditingController _txtPrice = TextEditingController();
   final FocusNode _fnPrice = FocusNode();
+  final TextEditingController _txtStart = TextEditingController(); //
+  final FocusNode _fnStart = FocusNode(); //
 
+  final TextEditingController _txtFinish = TextEditingController(); //
+  final FocusNode _fnFinish = FocusNode(); //
   bool _isLoading = false;
 
   _selectTime(BuildContext context) async {
@@ -87,6 +91,8 @@ class _ConsultationScheduleDetailState
     _startTime = schedule.startAt;
     _endTime = schedule.endAt;
     _txtPrice.text = NumberFormat("#,###").format(schedule.price);
+    _txtStart.text = schedule.start!; //
+    _txtFinish.text = schedule.finish!; //
     super.initState();
   }
 
@@ -101,10 +107,14 @@ class _ConsultationScheduleDetailState
                 child: IntrinsicHeight(
                   child: Column(
                     children: [
-                      const Toolbar(),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * 0.2,
+                        height: 30,
+                      ),
+                      Image.asset(
+                        'assets/icon-splash.png',
+                        width: 100,
+                      ),
+                      SizedBox(
                         child: const Center(
                           child: Card(
                             elevation: 2,
@@ -175,6 +185,58 @@ class _ConsultationScheduleDetailState
                                         ? Text(
                                             "${_startTime!.format(context)} - ${_endTime!.format(context)}")
                                         : const Text("Pick Time"),
+                                  ),
+                                  const SizedBox(height: 12.0),
+                                  const Text(
+                                    "Start",
+                                  ),
+                                  const SizedBox(height: 4),
+                                  TextFormField(
+                                    focusNode: _fnStart,
+                                    controller: _txtStart,
+                                    keyboardType: TextInputType.streetAddress,
+                                    maxLength: 50,
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      filled: true,
+                                      counterText: "",
+                                      fillColor: Colors.white,
+                                      hintText: 'Start',
+                                      errorStyle: const TextStyle(
+                                        color: Colors.amber,
+                                      ),
+                                    ),
+                                    onFieldSubmitted: (value) {
+                                      FocusScope.of(context).unfocus();
+                                    },
+                                  ),
+                                  const SizedBox(height: 4.0),
+                                  const Text(
+                                    "Finish",
+                                  ),
+                                  const SizedBox(height: 4),
+                                  TextFormField(
+                                    focusNode: _fnFinish,
+                                    controller: _txtFinish,
+                                    keyboardType: TextInputType.streetAddress,
+                                    maxLength: 50,
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      filled: true,
+                                      counterText: "",
+                                      fillColor: Colors.white,
+                                      hintText: 'Finish',
+                                      errorStyle: const TextStyle(
+                                        color: Colors.amber,
+                                      ),
+                                    ),
+                                    onFieldSubmitted: (value) {
+                                      FocusScope.of(context).unfocus();
+                                    },
                                   ),
                                   const SizedBox(height: 12.0),
                                   const Text("Price"),
@@ -313,6 +375,8 @@ class _ConsultationScheduleDetailState
       'end_at': DateFormat("hh:mm a").format(endtAt),
       // Parse the price, removing , (coma)
       'price': format.parse(_txtPrice.text),
+      'start': _txtStart.text, //
+      'finish': _txtFinish.text, //
     };
 
     await Provider.of<ConsultationScheduleProvider>(context, listen: false)

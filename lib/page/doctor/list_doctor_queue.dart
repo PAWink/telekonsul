@@ -38,7 +38,6 @@ class _ListDoctorQueueState extends State<ListDoctorQueue> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                const Toolbar(),
                 const SizedBox(height: 8.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
