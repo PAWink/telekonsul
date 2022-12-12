@@ -107,6 +107,10 @@ class _MainPageState extends State<MainPage> {
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
+
+
+
+
                         itemCount: value.listDoctor.length,
                         itemBuilder: (context, index) {
                           final item = value.listDoctor[index];
@@ -115,6 +119,10 @@ class _MainPageState extends State<MainPage> {
                                   element.daySchedule!.intValue ==
                                   DateTime.now().weekday)
                               .first;
+
+
+
+                              
 
                           return _doctorCard(item, itemKonsultasi, context);
                         },

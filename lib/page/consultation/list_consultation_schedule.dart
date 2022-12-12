@@ -37,15 +37,14 @@ class _ListConsultationScheduleState extends State<ListConsultationSchedule> {
           }
 
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.all(50),
             child: Column(children: [
-              const Toolbar(),
               const SizedBox(height: 8.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    "Car",
+                    "Your post",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),

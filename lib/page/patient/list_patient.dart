@@ -35,10 +35,9 @@ class _ListPasienState extends State<ListPasien> {
           }
 
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.all(50),
             child: Column(
               children: [
-                const Toolbar(),
                 const SizedBox(height: 12.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -110,7 +109,7 @@ class _ListPasienState extends State<ListPasien> {
             alignment: pw.Alignment.center,
             margin: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
             padding: const pw.EdgeInsets.only(bottom: 3.0 * PdfPageFormat.mm),
-            child: pw.Text('Report', style: pw.Theme.of(context).header3),
+            child: pw.Text('Go with you', style: pw.Theme.of(context).header3),
           );
         },
         build: (pw.Context context) => <pw.Widget>[
